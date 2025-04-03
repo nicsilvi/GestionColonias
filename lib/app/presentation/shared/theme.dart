@@ -56,17 +56,17 @@ class AppTheme {
   // darktheme  ---------------------------------------------------------------------------------------------
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: const Color.fromARGB(255, 223, 154, 5),
-    primaryColorDark: Colors.black,
-    scaffoldBackgroundColor: AppColors.dark,
+    primaryColorDark: const Color.fromARGB(255, 0, 0, 0),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 66, 66, 66),
     appBarTheme: const AppBarTheme(
-      color: AppColors.dark2,
+      color: Color.fromARGB(255, 0, 0, 0),
       iconTheme: IconThemeData(color: Color.fromARGB(255, 197, 191, 191)),
       titleTextStyle: TextStyle(
-        color: AppColors.darkop,
+        color: Color.fromARGB(255, 236, 174, 2),
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
-      elevation: 4, // Un poco de sombra para el appBar
+      elevation: 12, // Un poco de sombra para el appBar
     ),
     drawerTheme: const DrawerThemeData(
       backgroundColor: AppColors.dark2,
@@ -74,6 +74,10 @@ class AppTheme {
     ),
     bottomSheetTheme:
         const BottomSheetThemeData(backgroundColor: Color(0xFF333333)),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Color.fromARGB(255, 223, 154, 5), // Amarillo
+      foregroundColor: Colors.black, // Color del ícono
+    ),
 
     // Text styles
     textTheme: const TextTheme(
@@ -81,7 +85,7 @@ class AppTheme {
       bodyMedium:
           TextStyle(color: Colors.white54, fontSize: 14), // Texto más pequeño
       headlineLarge: TextStyle(
-          color: Colors.white,
+          color: Color.fromARGB(255, 255, 255, 255),
           fontSize: 32,
           fontWeight: FontWeight.bold), // Títulos grandes
       headlineMedium: TextStyle(
@@ -89,9 +93,9 @@ class AppTheme {
           fontSize: 28,
           fontWeight: FontWeight.w500), // Subtítulos
     ),
-    iconTheme: const IconThemeData(color: Colors.white), // Íconos blancos
+    iconTheme: const IconThemeData(color: Color.fromARGB(255, 255, 255, 255)),
     buttonTheme: const ButtonThemeData(
-      buttonColor: Color(0xFF6200EE),
+      buttonColor: Color.fromARGB(255, 209, 182, 27),
     ),
     // Ajuste del color de los elementos deseleccionados (como Checkboxes, etc)
     unselectedWidgetColor: Colors.white70,

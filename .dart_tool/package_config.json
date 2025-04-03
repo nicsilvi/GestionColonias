@@ -62,12 +62,6 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "csslib",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/csslib-1.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "3.1"
-    },
-    {
       "name": "cupertino_icons",
       "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
@@ -222,48 +216,6 @@
       "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/go_router-14.8.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
-    },
-    {
-      "name": "google_maps",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/google_maps-8.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "google_maps_flutter",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/google_maps_flutter-2.12.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.6"
-    },
-    {
-      "name": "google_maps_flutter_android",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.16.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.6"
-    },
-    {
-      "name": "google_maps_flutter_ios",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.15.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "google_maps_flutter_platform_interface",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/google_maps_flutter_platform_interface-2.11.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "google_maps_flutter_web",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.5.12",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "html",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/html-0.15.5",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
     },
     {
       "name": "http",
@@ -446,12 +398,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "sanitize_html",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/sanitize_html-2.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "sky_engine",
       "rootUri": "file:///home/appex/Documentos/SDKs/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -480,12 +426,6 @@
       "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/stream_channel-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "3.3"
-    },
-    {
-      "name": "stream_transform",
-      "rootUri": "file:///home/appex/.pub-cache/hosted/pub.dev/stream_transform-2.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.1"
     },
     {
       "name": "string_scanner",
@@ -548,7 +488,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-04-02T13:14:01.429465Z",
+  "generated": "2025-04-03T10:55:45.516741Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///home/appex/Documentos/SDKs/flutter",

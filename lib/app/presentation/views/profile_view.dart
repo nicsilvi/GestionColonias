@@ -69,7 +69,7 @@ class _ProfileViewState extends ConsumerState<ProfileView>
                       style: Theme.of(context).textTheme.bodyLarge),
                   const SizedBox(height: 8),
                   Text(
-                    "Photographer & Digital Artist",
+                    "Voluntario",
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey[600],
                         ),
@@ -81,7 +81,7 @@ class _ProfileViewState extends ConsumerState<ProfileView>
                     tabs: const [
                       Tab(text: "Basic"),
                       Tab(text: "Advanced"),
-                      Tab(text: "Special Effects"),
+                      Tab(text: "Últimas donaciones"),
                     ],
                   ),
                   Expanded(
@@ -90,7 +90,7 @@ class _ProfileViewState extends ConsumerState<ProfileView>
                       children: [
                         const Center(child: Text("Basic")),
                         const Center(child: Text("Advanced")),
-                        const Center(child: Text("Special Effects")),
+                        const Center(child: Text("últimas donaciones")),
                       ],
                     ),
                   ),

@@ -36,7 +36,7 @@ class CatModel {
       name: json["name"],
       profileImage: json["profileImage"],
       age: (json["age"] as Timestamp).toDate(),
-      coloniaId: json["coloniaId"], // ID de la colonia asociada
+      coloniaId: json["coloniaId"],
     );
   }
 
@@ -45,6 +45,6 @@ class CatModel {
         "name": name,
         "profileImage": profileImage,
         "age": Timestamp.fromDate(age),
-        "coloniaId": coloniaId, // Guardar ID de la colonia asociada
+        "coloniaId": coloniaId,
       };
 }
