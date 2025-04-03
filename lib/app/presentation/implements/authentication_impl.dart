@@ -89,6 +89,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         firstName: capitalize(firstname),
         lastName: capitalize(lastname ?? ''),
         createdAt: DateTime.now(),
+        role: "user",
         profileImage: Assets.userIcon1,
       );
       await saveUserToFirestore((newUser));

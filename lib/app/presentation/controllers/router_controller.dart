@@ -1,11 +1,16 @@
 import 'package:autentification/app/domain/models/user_model.dart';
 import 'package:autentification/app/presentation/controllers/auth_controller.dart';
+import 'package:autentification/app/presentation/views/admin_colonias.dart';
 import 'package:autentification/app/presentation/views/login_view.dart';
 import 'package:autentification/app/presentation/views/profile_view.dart';
 import 'package:autentification/app/presentation/views/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../views/admin_donaciones.dart';
+import '../views/admin_gatos.dart';
+import '../views/cat_view.dart';
+import '../views/colonia_view.dart';
 import '../views/home_view.dart';
 
 final userLoaderFutureProvider = StreamProvider<UserModel?>((ref) {
@@ -43,6 +48,36 @@ final goRouterProvider = Provider<GoRouter>(
                 path: '/profile',
                 builder: (context, state) => const ProfileView(),
               ),
+              GoRoute(
+                name: AdminColonias.routeName,
+                path: '/adminColonias',
+                builder: (context, state) => const AdminColonias(),
+              ),
+              GoRoute(
+                name: AdminGatos.routeName,
+                path: '/adminGatos',
+                builder: (context, state) => const AdminGatos(),
+              ),
+              GoRoute(
+                name: AdminDonaciones.routeName,
+                path: '/adminDonaciones',
+                builder: (context, state) => const AdminDonaciones(),
+              ),
+              GoRoute(
+                name: CatView.routeName,
+                path: '/catView',
+                builder: (context, state) => const CatView(),
+              ),
+              /*  GoRoute(
+                name: ColoniaDetails.routeName,
+                path: '/colonia',
+                builder: (context, state) => const ColoniaDetails(),
+              ),
+              GoRoute(
+                name: Donaciones.routeName,
+                path: '/donaciones',
+                builder: (context, state) => const Donaciones(),
+              ),*/
             ])
       ],
       redirect: (context, state) {
