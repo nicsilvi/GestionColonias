@@ -5,14 +5,14 @@ class CatModel {
   final String name;
   final String profileImage;
   final DateTime age;
-  final String coloniaId;
+  final String? coloniaId;
 
   CatModel({
     required this.id,
     required this.name,
     required this.profileImage,
     required this.age,
-    required this.coloniaId,
+    this.coloniaId,
   });
 
   CatModel copyWith({

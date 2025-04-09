@@ -2,7 +2,6 @@ import 'package:autentification/app/presentation/controllers/auth_controller.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
 import '../controllers/theme_controller.dart';
 
 class DrawerMenu extends ConsumerWidget {
@@ -12,7 +11,6 @@ class DrawerMenu extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeService = ref.watch(
         themeControllerProvider); // es watch pq se reconstruye este mismo widget
-    final authService = ref.read(authenticationRepositoryProvider);
 
     return Drawer(
       child: SingleChildScrollView(
@@ -46,8 +44,8 @@ class DrawerMenu extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
               ListTile(
-                leading: Icon(Icons.settings),
-                title: Text("Settings"),
+                leading: const Icon(Icons.settings),
+                title: const Text("Settings"),
                 onTap: () {
                   context.pop();
                   //ir a la vista de settings
@@ -74,7 +72,8 @@ class DrawerMenu extends ConsumerWidget {
                 title: const Text("Cerrar sesión"),
                 onTap: () async {
                   if (!context.mounted) return;
-                  await authService.signOut();
+                  print("cerrar sesion");
+                  await ref.read(authenticationRepositoryProvider).signOut();
                 },
               ),
             ],

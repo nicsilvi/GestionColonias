@@ -90,6 +90,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         lastName: capitalize(lastname ?? ''),
         createdAt: DateTime.now(),
         role: "user",
+        coloniaIds: [],
+        phoneNumber: null,
         profileImage: Assets.userIcon1,
       );
       await saveUserToFirestore((newUser));
@@ -126,6 +128,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       await FirebaseAuth.instance.signOut();
       return true;
     } catch (e) {
+      debugPrint("Error al cerrar sesión: $e");
       return false;
     }
   }
@@ -238,19 +241,14 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Stream<UserModel?> isUserLoggedIn() async* {
     final userStream = FirebaseAuth.instance.authStateChanges();
     await for (final User? user in userStream) {
+      print("Estado del usuario en isUserLoggedIn: $user");
       //usuari mno loggejat
       if (user == null) {
         yield null;
       } else {
         try {
-          final userDocStream = getUserFromFirestore(user.uid);
-          await for (final userModel in userDocStream) {
-            if (userModel != null) {
-              yield userModel; // Devuelve el modelo completo del usuario
-            } else {
-              yield null;
-            }
-          }
+          final userModel = await getUserFromFirestore(user.uid).first;
+          yield userModel; // Devuelve el modelo completo del usuario
         } catch (e) {
           debugPrint("Error al recuperar el usuario: $e");
           yield null;

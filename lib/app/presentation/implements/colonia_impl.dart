@@ -1,3 +1,4 @@
+import 'package:autentification/app/presentation/shared/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../domain/models/colonia_model.dart';
@@ -35,6 +36,32 @@ class ColoniaRepositoryImpl {
       return true;
     } catch (e) {
       print("Error al agregar el gato a la colonia: $e");
+      return false;
+    }
+  }
+
+  Future<bool> deleteColonia(String coloniaId) async {
+    try {
+      final coloniaRef = _firestore.collection('colonias').doc(coloniaId);
+      final coloniaSnapshot = await coloniaRef.get();
+      if (!coloniaSnapshot.exists) {
+        print("La colonia no existe: $coloniaId");
+        return false;
+      }
+
+      final List<String> catIds =
+          List<String>.from(coloniaSnapshot.data()?['cats'] ?? []);
+
+      // Actualizar los gatos para que pasen a "sin colonia"
+      for (final catId in catIds) {
+        final catRef = _firestore.collection('gatos').doc(catId);
+        await catRef.update({'coloniaId': null});
+      }
+      await coloniaRef.delete();
+      print("Colonia eliminada: $coloniaId");
+      return true;
+    } catch (e) {
+      print("Error al eliminar la colonia: $e");
       return false;
     }
   }
@@ -83,6 +110,39 @@ class ColoniaRepositoryImpl {
     }
   }
 
+  Future<bool> assignColoniaToUser(String userId, String coloniaId) async {
+    try {
+      final userRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+
+      await userRef.update({
+        'coloniaIds':
+            FieldValue.arrayUnion([coloniaId]), // Agregar el ID de la colonia
+      });
+
+      return true;
+    } catch (e) {
+      print("Error al asignar la colonia al usuario: $e");
+      return false;
+    }
+  }
+
+  Future<bool> removeColoniaToUser(String userId, String coloniaId) async {
+    try {
+      final userRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+
+      await userRef.update({
+        'coloniaIds': FieldValue.arrayRemove([coloniaId]),
+      });
+
+      return true;
+    } catch (e) {
+      print("Error al eliminar la colonia al usuario: $e");
+      return false;
+    }
+  }
+
   /// Actualizar el número de gatos manualmente
   Future<bool> updateNumberOfCats(String coloniaId, int newNumber) async {
     try {
@@ -114,8 +174,7 @@ class ColoniaRepositoryImpl {
 Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
   final idController = TextEditingController();
   final descriptionController = TextEditingController();
-  final latitudeController = TextEditingController();
-  final longitudeController = TextEditingController();
+  final addressController = TextEditingController();
 
   return showDialog<ColoniaModel>(
     context: context,
@@ -136,14 +195,8 @@ Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
                 decoration: const InputDecoration(labelText: "Descripción"),
               ),
               TextField(
-                controller: latitudeController,
-                decoration: const InputDecoration(labelText: "Latitud"),
-                keyboardType: TextInputType.number,
-              ),
-              TextField(
-                controller: longitudeController,
-                decoration: const InputDecoration(labelText: "Longitud"),
-                keyboardType: TextInputType.number,
+                controller: addressController,
+                decoration: const InputDecoration(labelText: "Dirección"),
               ),
             ],
           ),
@@ -154,17 +207,12 @@ Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
             child: const Text("Cancelar"),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               final id = idController.text.trim();
               final description = descriptionController.text.trim();
-              final latitude = double.tryParse(latitudeController.text.trim());
-              final longitude =
-                  double.tryParse(longitudeController.text.trim());
+              final address = addressController.text.trim();
 
-              if (id.isEmpty ||
-                  description.isEmpty ||
-                  latitude == null ||
-                  longitude == null) {
+              if (id.isEmpty || description.isEmpty || address.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                       content: Text("Por favor, completa todos los campos")),
@@ -172,14 +220,24 @@ Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
                 return;
               }
 
+              final coordinates = await getCoordinatesFromAddress(address);
+              if (coordinates == null) {
+                if (!context.mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text("No se pudo obtener la ubicación")),
+                );
+                return;
+              }
+
               final newColonia = ColoniaModel(
                 id: id,
                 createdAt: DateTime.now(),
-                location: GeoPoint(latitude, longitude),
+                location: GeoPoint(coordinates.latitude, coordinates.longitude),
                 cats: [],
                 comments: [],
               );
-
+              if (!context.mounted) return;
               Navigator.pop(context, newColonia);
             },
             child: const Text("Agregar"),
