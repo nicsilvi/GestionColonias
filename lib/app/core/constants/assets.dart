@@ -10,3 +10,10 @@ final List<String> images = [
   Assets.userIcon2,
   Assets.userIcon3,
 ];
+
+final List<String> preselectedImages = [
+  'assets/img/cat1.png',
+  'assets/img/cat2.png',
+  'assets/img/cat3.jpg',
+  'assets/img/cat4.png',
+];

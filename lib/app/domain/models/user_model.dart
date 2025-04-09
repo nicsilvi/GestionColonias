@@ -6,6 +6,7 @@ class UserModel {
   final String email;
   final String firstName;
   final String? lastName;
+  final List<String>? coloniaIds;
   final String? role;
   final String? phoneNumber;
   final String? profileImage;
@@ -16,6 +17,7 @@ class UserModel {
     required this.firstName,
     required this.createdAt,
     this.lastName,
+    this.coloniaIds,
     this.role,
     this.phoneNumber,
     this.profileImage,
@@ -35,6 +37,7 @@ class UserModel {
         id: id ?? this.id,
         email: email ?? this.email,
         firstName: firstName ?? this.firstName,
+        coloniaIds: coloniaIds ?? coloniaIds,
         lastName: lastName ?? this.lastName,
         phoneNumber: phoneNumber ?? this.phoneNumber,
         createdAt: createdAt ?? this.createdAt,
@@ -49,6 +52,7 @@ class UserModel {
       firstName: json["firstName"] ?? '',
       lastName: json["lastName"],
       phoneNumber: json["phoneNumber"],
+      coloniaIds: List<String>.from(json["coloniaIds"] ?? []),
       role: json["role"],
       createdAt: json["createdAt"] == null
           ? DateTime.now()
@@ -62,6 +66,7 @@ class UserModel {
         "email": email,
         "firstName": firstName,
         if (role != null) "role": role,
+        if (coloniaIds != null) "coloniaIds": coloniaIds,
         "createdAt": Timestamp.fromDate(createdAt),
         if (lastName != null) "lastName": lastName,
         if (phoneNumber != null) "phoneNumber": phoneNumber,

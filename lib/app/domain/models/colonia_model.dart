@@ -35,7 +35,7 @@ class ColoniaModel {
       createdAt: json["createdAt"] == null
           ? DateTime.now()
           : json["createdAt"].toDate(),
-      location: json["location"] ?? GeoPoint(0, 0),
+      location: json["location"] ?? const GeoPoint(0, 0),
       cats: List<String>.from(json["catIds"] ?? []),
       comments: List<String>.from(json["comments"] ?? []),
     );

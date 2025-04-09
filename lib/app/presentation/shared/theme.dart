@@ -78,7 +78,25 @@ class AppTheme {
       backgroundColor: Color.fromARGB(255, 223, 154, 5), // Amarillo
       foregroundColor: Colors.black, // Color del ícono
     ),
-
+    dialogTheme: const DialogTheme(
+      backgroundColor: Color.fromARGB(255, 66, 66, 66),
+      titleTextStyle: TextStyle(
+        color: Color.fromARGB(255, 223, 154, 5),
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+      ),
+      contentTextStyle: TextStyle(
+        color: Colors.white70,
+        fontSize: 16,
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        backgroundColor: const Color.fromARGB(255, 223, 154, 5),
+        foregroundColor: Colors.black,
+        textStyle: const TextStyle(fontSize: 16),
+      ),
+    ),
     // Text styles
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: Colors.white70, fontSize: 16), // Texto normal

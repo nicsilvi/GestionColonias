@@ -24,6 +24,8 @@ class ColoniaResponse {
 abstract class ColoniaRepository {
   Future<List<ColoniaModel>> fetchColonias();
   Future<bool> addCatToColonia(String coloniaId, String catId);
+  Future<bool> deleteColonia(String coloniaId);
+  Future<bool> assignColoniaToUser(String userId, String coloniaId);
   Future<bool> removeCatFromColonia(String coloniaId, String catId);
   Future<bool> addCommentToColonia(String coloniaId, String comment);
   Future<bool> addNewColonia(String coloniaId, String? comment);

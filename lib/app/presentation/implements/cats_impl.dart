@@ -67,4 +67,31 @@ class CatRepositoryImpl {
       return null;
     }
   }
+
+/*
+  // Función para borrar un gato
+  void _deleteCat(BuildContext context, String catId) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Confirmar"),
+        content: const Text("¿Estás seguro de que deseas borrar este gato?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancelar"),
+          ),
+          TextButton(
+            onPressed: () {
+              // Aquí iría la lógica para borrar el gato de Firebase
+              print("Gato con ID $catId borrado");
+              Navigator.pop(context);
+            },
+            child: const Text("Borrar"),
+          ),
+        ],
+      ),
+    );
+  }
+*/
 }

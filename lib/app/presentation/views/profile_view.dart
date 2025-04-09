@@ -59,7 +59,8 @@ class _ProfileViewState extends ConsumerState<ProfileView>
                   GestureDetector(
                     onTap: () async {
                       await pickAndSelectImage(
-                          context, userLoaderState.value!.id);
+                          context, userLoaderState.value!.id, ref);
+                      ref.invalidate(userLoaderFutureProvider);
                     },
                     child: CircleAvatar(radius: 60, backgroundImage: img.image),
                   ),
@@ -69,7 +70,9 @@ class _ProfileViewState extends ConsumerState<ProfileView>
                       style: Theme.of(context).textTheme.bodyLarge),
                   const SizedBox(height: 8),
                   Text(
-                    "Voluntario",
+                    userLoaderState.value?.role == "admin"
+                        ? "Administrador"
+                        : "Voluntario",
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey[600],
                         ),
@@ -79,18 +82,18 @@ class _ProfileViewState extends ConsumerState<ProfileView>
                   TabBar(
                     controller: _tabController,
                     tabs: const [
-                      Tab(text: "Basic"),
-                      Tab(text: "Advanced"),
+                      Tab(text: "Útlimos gatos añadidos"),
+                      Tab(text: "Nuevos comentarios"),
                       Tab(text: "Últimas donaciones"),
                     ],
                   ),
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
-                      children: [
-                        const Center(child: Text("Basic")),
-                        const Center(child: Text("Advanced")),
-                        const Center(child: Text("últimas donaciones")),
+                      children: const [
+                        Center(child: Text("útlimos gatos añadidos")),
+                        Center(child: Text("últimos comentarios añadidos")),
+                        Center(child: Text("últimas donaciones")),
                       ],
                     ),
                   ),
