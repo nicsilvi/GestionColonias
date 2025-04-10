@@ -2,6 +2,7 @@
 
 run -flutter pub get
     -flutter pub add flutter_map latlong2
+    flutterfire configure
 
 
 ## Getting Started
