@@ -10,7 +10,9 @@ class AppTheme {
     //al ser copywith solo se modifica lo especificado aqui
     primaryColor: const Color.fromARGB(255, 96, 3, 114),
     primaryColorDark: Colors.black,
-    scaffoldBackgroundColor: AppColors.lightBg,
+    primaryColorLight: const Color.fromARGB(120, 224, 219, 223),
+    secondaryHeaderColor: const Color.fromARGB(255, 63, 16, 51),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 245, 216, 238),
     appBarTheme: const AppBarTheme(
       color: AppColors.lightBg,
       iconTheme: IconThemeData(color: Color.fromARGB(255, 87, 84, 84)),
@@ -44,8 +46,7 @@ class AppTheme {
           fontSize: 28,
           fontWeight: FontWeight.w500), // Subtítulos
     ),
-    iconTheme: const IconThemeData(
-        color: Color.fromARGB(255, 8, 8, 8)), // Íconos blancos
+    iconTheme: const IconThemeData(color: Color.fromARGB(255, 165, 31, 125)),
     buttonTheme: const ButtonThemeData(
       buttonColor: Color(0xFF6200EE),
     ),
@@ -57,10 +58,12 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: const Color.fromARGB(255, 223, 154, 5),
     primaryColorDark: const Color.fromARGB(255, 0, 0, 0),
+    secondaryHeaderColor: const Color.fromARGB(255, 78, 68, 12),
+    primaryColorLight: const Color.fromARGB(120, 104, 104, 103),
     scaffoldBackgroundColor: const Color.fromARGB(255, 66, 66, 66),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 0, 0, 0),
-      iconTheme: IconThemeData(color: Color.fromARGB(255, 197, 191, 191)),
+      iconTheme: IconThemeData(color: Color.fromARGB(255, 136, 127, 8)),
       titleTextStyle: TextStyle(
         color: Color.fromARGB(255, 236, 174, 2),
         fontSize: 22,
@@ -92,7 +95,7 @@ class AppTheme {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 223, 154, 5),
+        backgroundColor: const Color.fromARGB(255, 41, 30, 6),
         foregroundColor: Colors.black,
         textStyle: const TextStyle(fontSize: 16),
       ),

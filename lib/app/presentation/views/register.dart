@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
+import '../../core/constants/assets.dart';
 import '../controllers/auth_controller.dart';
 
 class Register extends ConsumerWidget {
@@ -31,8 +33,24 @@ class Register extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Registro:", style: Theme.of(context).textTheme.bodyLarge),
-                const SizedBox(height: 24),
+                Lottie.asset(
+                  Assets.animationCat2,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                ),
+
+                const Text(
+                  '¿Todavía sin cuenta? 🐾 ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 29,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Text("Regístrate gratis: ",
+                    style: Theme.of(context).textTheme.bodyLarge),
+                const SizedBox(height: 26),
                 TextFormField(
                   controller: nameController,
                   decoration: InputDecoration(
@@ -46,6 +64,7 @@ class Register extends ConsumerWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
                 TextFormField(
                   controller: lastnameController,
                   decoration: InputDecoration(
@@ -59,6 +78,7 @@ class Register extends ConsumerWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -72,7 +92,7 @@ class Register extends ConsumerWidget {
                     ),
                   ),
                 ),
-
+                const SizedBox(height: 8),
                 // Campo de contraseña
                 TextFormField(
                   controller: passwordController,
@@ -116,7 +136,8 @@ class Register extends ConsumerWidget {
                       children: const [
                         TextSpan(
                           text: "Inicia sesión",
-                          style: TextStyle(color: Colors.greenAccent),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 61, 160, 112)),
                         ),
                       ],
                     ),
