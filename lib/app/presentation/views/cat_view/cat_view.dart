@@ -22,7 +22,7 @@ class _CatView extends ConsumerState<CatView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Colonias de Gatos'),
+        title: const Text('Gatos'),
       ),
       endDrawer: const DrawerMenu(),
       body: catListAsync.when(
@@ -40,7 +40,7 @@ class _CatView extends ConsumerState<CatView> {
           }
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4, // Dos columnas
+              crossAxisCount: 3, // Dos columnas
               crossAxisSpacing: 8.0, // Espacio entre columnas
               mainAxisSpacing: 8.0, // Espacio entre filas
             ),

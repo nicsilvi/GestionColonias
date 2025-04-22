@@ -29,24 +29,33 @@ class ColoniaFloatingButtons extends StatelessWidget {
                   width: 300,
                   height: 400,
                   child: AlertDialog(
-                    title: const Text("Seleccionar Colonia"),
+                    title: const Text("¿Dónde quieres ser voluntario?"),
                     content: Consumer(
                       builder: (context, ref, child) {
                         final coloniaListAsync = ref.watch(coloniaListProvider);
 
                         return coloniaListAsync.when(
                           data: (colonias) {
+                            final availableColonias = colonias.where((colonia) {
+                              return !(user.coloniaIds?.contains(colonia.id) ??
+                                  false);
+                            }).toList();
+                            if (availableColonias.isEmpty) {
+                              return const Center(
+                                child: Text(
+                                    "No hay colonias disponibles para asignar"),
+                              );
+                            }
                             return SizedBox(
                               height: 300,
                               width: 300,
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: colonias.length,
+                                itemCount: availableColonias.length,
                                 itemBuilder: (context, index) {
-                                  final colonia = colonias[index];
+                                  final colonia = availableColonias[index];
                                   return ListTile(
                                     title: Text(colonia.id),
-                                    subtitle: Text("ID: ${colonia.id}"),
                                     onTap: () {
                                       Navigator.pop(
                                           context,
@@ -143,12 +152,8 @@ class ColoniaFloatingButtons extends StatelessWidget {
                                   final colonia = userColonias.value![index];
                                   return ListTile(
                                     title: Text(colonia.id),
-                                    subtitle: Text("ID: ${colonia.id}"),
                                     onTap: () {
-                                      Navigator.pop(
-                                          context,
-                                          colonia
-                                              .id); // Retornar el ID de la colonia seleccionada
+                                      Navigator.pop(context, colonia.id);
                                     },
                                   );
                                 },

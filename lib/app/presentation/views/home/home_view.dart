@@ -38,8 +38,13 @@ class _HomeviewState extends ConsumerState<HomeView> {
                     children: [
                       Expanded(
                         child: ListTile(
-                          leading: const Icon(Icons.map),
-                          title: const Text("Mis Colonias"),
+                          leading: Icon(Icons.map,
+                              color: Theme.of(context).iconTheme.color),
+                          title: Text(
+                            "Mis Colonias",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
                           onTap: () {
                             context.go('/home/colonia');
                           },
@@ -48,8 +53,13 @@ class _HomeviewState extends ConsumerState<HomeView> {
                       if (userLoaderState.value?.role == 'admin')
                         Expanded(
                           child: ListTile(
-                            leading: const Icon(Icons.maps_home_work),
-                            title: const Text("Administrar Colonias"),
+                            leading: Icon(Icons.maps_home_work,
+                                color: Theme.of(context).iconTheme.color),
+                            title: Text(
+                              "Administrar Colonias",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            ),
                             onTap: () {
                               context.go('/home/adminColonias');
                             },
@@ -61,8 +71,13 @@ class _HomeviewState extends ConsumerState<HomeView> {
                     children: [
                       Expanded(
                         child: ListTile(
-                          leading: const Icon(Icons.pets),
-                          title: const Text("Gatos"),
+                          leading: Icon(Icons.pets,
+                              color: Theme.of(context).iconTheme.color),
+                          title: Text(
+                            "Gatos",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
                           onTap: () {
                             context.go('/home/catView');
                           },
@@ -71,8 +86,13 @@ class _HomeviewState extends ConsumerState<HomeView> {
                       if (userLoaderState.value?.role == 'admin')
                         Expanded(
                           child: ListTile(
-                            leading: const Icon(Icons.pets_rounded),
-                            title: const Text("Administrar Gatos"),
+                            leading: Icon(Icons.pets_rounded,
+                                color: Theme.of(context).iconTheme.color),
+                            title: Text(
+                              "Administrar Gatos",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            ),
                             onTap: () {
                               context.go('/home/adminGatos');
                             },
@@ -84,8 +104,13 @@ class _HomeviewState extends ConsumerState<HomeView> {
                     children: [
                       Expanded(
                         child: ListTile(
-                          leading: const Icon(Icons.favorite),
-                          title: const Text("Donaciones"),
+                          leading: Icon(Icons.favorite,
+                              color: Theme.of(context).iconTheme.color),
+                          title: Text(
+                            "Donaciones",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
                           onTap: () {
                             //todavía no existe la implementación
                             // context.go('/home/donaciones');
@@ -95,8 +120,13 @@ class _HomeviewState extends ConsumerState<HomeView> {
                       if (userLoaderState.value?.role == 'admin')
                         Expanded(
                           child: ListTile(
-                            leading: const Icon(Icons.favorite_border),
-                            title: const Text("Administrar Donaciones"),
+                            leading: Icon(Icons.favorite_border,
+                                color: Theme.of(context).iconTheme.color),
+                            title: Text(
+                              "Administrar Donaciones",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            ),
                             onTap: () {
                               context.go('/home/adminDonaciones');
                             },

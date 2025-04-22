@@ -56,6 +56,19 @@ class CatRepositoryImpl {
     }
   }
 
+  Future<bool> addCatComment(String catId, String comment) async {
+    try {
+      await _firestore.collection('gatos').doc(catId).update({
+        'comments': FieldValue.arrayUnion([comment])
+      });
+      print("Comentario agregado al gato: $catId");
+      return true;
+    } catch (e) {
+      print("Error al agregar el comentario: $e");
+      return false;
+    }
+  }
+
   /// Obtener un gato por ID
   Future<CatModel?> getCatById(String catId) async {
     try {

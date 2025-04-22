@@ -26,5 +26,6 @@ abstract class CatRepository {
   Future<bool> addCat(CatModel cat);
   Future<bool> updateCat(CatModel cat);
   Future<bool> deleteCat(String catId);
+  Future<bool> addCatComment(String catId, String comment);
   Future<CatModel?> getCatById(String catId);
 }

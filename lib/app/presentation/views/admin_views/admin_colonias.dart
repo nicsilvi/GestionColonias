@@ -50,9 +50,13 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
                   size: 20,
                   color: Theme.of(context).iconTheme.color,
                 )),
-                title: Text("Colonia: ${colonia.id}"),
+                title: Text("Colonia: ${colonia.id}",
+                    style:
+                        TextStyle(color: Theme.of(context).primaryColorDark)),
                 subtitle: Text(
-                    "Número de gatos actualmente: ${colonia.cats.length}\nÚltimo comentario añadido: ${colonia.comments?.isNotEmpty == true ? colonia.comments?.last : "Sin comentarios"}"),
+                    "Número de gatos actualmente: ${colonia.cats.length}\nÚltimo comentario añadido: ${colonia.comments?.isNotEmpty == true ? colonia.comments?.last : "Sin comentarios"}",
+                    style:
+                        TextStyle(color: Theme.of(context).primaryColorDark)),
                 trailing: IconButton(
                   icon: const Icon(Icons.delete, color: Colors.red),
                   tooltip: "Eliminar Colonia",

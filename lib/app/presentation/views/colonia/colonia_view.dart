@@ -68,7 +68,7 @@ class ColoniaDetails extends ConsumerWidget {
                           title: Text(colonia.id),
                           subtitle: Text(
                               "Número de gatos: ${colonia.cats.length}\n"
-                              "Última visita: ${colonia.lastVisit != null ? colonia.lastVisit : "Sin visitas"}\n"
+                              "Última visita: ${colonia.lastVisit ?? "Sin visitas"}\n"
                               "Último comentario: ${colonia.comments?.isNotEmpty == true ? colonia.comments?.last : "Sin comentarios"}"),
                           trailing: IconButton(
                             icon: Icon(Icons.plus_one_rounded,

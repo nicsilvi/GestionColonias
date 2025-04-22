@@ -8,9 +8,9 @@ class AppTheme {
   // Light theme  ---------------------------------------------------------------------------------------------
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     //al ser copywith solo se modifica lo especificado aqui
-    primaryColor: const Color.fromARGB(255, 96, 3, 114),
+    primaryColor: const Color.fromARGB(255, 146, 4, 82),
     primaryColorDark: Colors.black,
-    scaffoldBackgroundColor: AppColors.lightBg,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 247, 216, 238),
     appBarTheme: const AppBarTheme(
       color: AppColors.lightBg,
       iconTheme: IconThemeData(color: Color.fromARGB(255, 87, 84, 84)),
@@ -25,8 +25,8 @@ class AppTheme {
       backgroundColor: Color.fromARGB(255, 199, 185, 185),
       scrimColor: Color.fromARGB(137, 245, 235, 235),
     ),
-    bottomSheetTheme:
-        const BottomSheetThemeData(backgroundColor: Color(0xFF333333)),
+    bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Color.fromARGB(45, 228, 52, 252)),
 
     // Text styles
     textTheme: const TextTheme(
@@ -49,6 +49,9 @@ class AppTheme {
     buttonTheme: const ButtonThemeData(
       buttonColor: Color(0xFF6200EE),
     ),
+    colorScheme: const ColorScheme.dark(
+      primary: Color.fromARGB(255, 243, 17, 142),
+    ),
     // Ajuste del color de los elementos deseleccionados (como Checkboxes, etc)
     unselectedWidgetColor: const Color.fromARGB(179, 55, 10, 114),
   );
@@ -56,7 +59,7 @@ class AppTheme {
   // darktheme  ---------------------------------------------------------------------------------------------
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: const Color.fromARGB(255, 223, 154, 5),
-    primaryColorDark: const Color.fromARGB(255, 0, 0, 0),
+    primaryColorDark: const Color.fromARGB(255, 255, 255, 255),
     scaffoldBackgroundColor: const Color.fromARGB(255, 66, 66, 66),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 0, 0, 0),
@@ -66,14 +69,18 @@ class AppTheme {
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
-      elevation: 12, // Un poco de sombra para el appBar
+      elevation: 12,
     ),
     drawerTheme: const DrawerThemeData(
       backgroundColor: AppColors.dark2,
       scrimColor: Color(0x8A000000),
     ),
-    bottomSheetTheme:
-        const BottomSheetThemeData(backgroundColor: Color(0xFF333333)),
+    colorScheme: const ColorScheme.dark(
+      primary: Color.fromARGB(255, 37, 128, 2),
+    ),
+
+    bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Color.fromARGB(255, 110, 107, 109)),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color.fromARGB(255, 223, 154, 5), // Amarillo
       foregroundColor: Colors.black, // Color del ícono

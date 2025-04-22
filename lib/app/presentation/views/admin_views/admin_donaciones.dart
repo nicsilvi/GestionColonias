@@ -48,7 +48,7 @@ class _AdminDonacionesState extends ConsumerState<AdminDonaciones> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         iconSize: 30,
-        onTap: (int) {},
+        onTap: (index) {},
         currentIndex: 0,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
