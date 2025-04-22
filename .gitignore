@@ -1,3 +1,24 @@
+# Archivos de configuración de Firebase (NO deben subirse)
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 lib/firebase_options.dart
+
+# Directorios de build/autogenerados
+/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# Archivos específicos de IDEs
+.idea/
+*.iml
+
+# Archivos de VSCode (opcional si usás VSCode)
+.vscode/
+
+# macOS (si usás Mac)
+.DS_Store
+
+# Linux / Vim / Nano
+*.swp
