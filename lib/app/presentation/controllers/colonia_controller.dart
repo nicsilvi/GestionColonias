@@ -29,6 +29,7 @@ abstract class ColoniaRepository {
   Future<bool> removeCatFromColonia(String coloniaId, String catId);
   Future<bool> addCommentToColonia(String coloniaId, String comment);
   Future<bool> addNewColonia(String coloniaId, String? comment);
+  Future<bool> markColoniaVisited(String coloniaId, DateTime visitDate);
   Future<bool> updateNumberOfCats(String coloniaId, int newNumber);
   Future<ColoniaModel?> getColoniaById(String coloniaId);
 }

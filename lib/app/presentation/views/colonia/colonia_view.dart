@@ -2,6 +2,7 @@ import 'package:autentification/app/presentation/controllers/router_controller.d
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../controllers/colonia_controller.dart';
+import '../menu_lateral.dart';
 import 'widgets_colonia.dart';
 
 class ColoniaDetails extends ConsumerWidget {
@@ -14,9 +15,8 @@ class ColoniaDetails extends ConsumerWidget {
     final userAsync = ref.watch(userLoaderFutureProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Colonias Asignadas"),
-      ),
+      appBar: AppBar(),
+      endDrawer: const DrawerMenu(),
       body: userAsync.when(
         data: (user) {
           if (user == null) {
@@ -41,69 +41,139 @@ class ColoniaDetails extends ConsumerWidget {
                 );
               }
 
-              return ListView.builder(
-                itemCount: userColonias.length,
-                itemBuilder: (context, index) {
-                  final colonia = userColonias[index];
-                  return ListTile(
-                    title: Text(colonia.id),
-                    subtitle: Text("Número de gatos: ${colonia.cats.length}"),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.comment),
-                      tooltip: "Agregar comentario",
-                      onPressed: () async {
-                        final comment = await showDialog<String>(
-                          context: context,
-                          builder: (context) {
-                            String? newComment;
-                            return AlertDialog(
-                              title: const Text("Agregar Comentario"),
-                              content: TextField(
-                                onChanged: (value) {
-                                  newComment = value;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text("Colonias Asignadas",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                        const Spacer(),
+                        Text("Añadir Visita ",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: userColonias.length,
+                      itemBuilder: (context, index) {
+                        final colonia = userColonias[index];
+                        return ListTile(
+                          title: Text(colonia.id),
+                          subtitle: Text(
+                              "Número de gatos: ${colonia.cats.length}\n"
+                              "Última visita: ${colonia.lastVisit != null ? colonia.lastVisit : "Sin visitas"}\n"
+                              "Último comentario: ${colonia.comments?.isNotEmpty == true ? colonia.comments?.last : "Sin comentarios"}"),
+                          trailing: IconButton(
+                            icon: Icon(Icons.plus_one_rounded,
+                                size: 30,
+                                color: Theme.of(context).iconTheme.color),
+                            tooltip: "Marcar colonia visitada",
+                            onPressed: () async {
+                              colonia.lastVisit = DateTime.now();
+                              final comment = await showDialog<String>(
+                                context: context,
+                                builder: (context) {
+                                  String? newComment;
+                                  return AlertDialog(
+                                    title: Text(
+                                        "¿Quieres agregar un comentario?",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge),
+                                    content: TextField(
+                                      onChanged: (value) {
+                                        newComment = value;
+                                      },
+                                      decoration: const InputDecoration(
+                                        hintText: "¿Cómo fue tu visita?",
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            context, "sin comentario"),
+                                        child:
+                                            const Text("Visita sin comentario"),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, newComment),
+                                        child: const Text("Agregar comentario"),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, null),
+                                        child: const Text("Cancelar"),
+                                      ),
+                                    ],
+                                  );
                                 },
-                                decoration: const InputDecoration(
-                                  hintText: "Escr ibe tu comentario aquí",
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, null),
-                                  child: const Text("Cancelar"),
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, newComment),
-                                  child: const Text("Agregar"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                              );
 
-                        if (comment != null && comment.isNotEmpty) {
-                          final success = await ref
-                              .read(coloniaRepositoryProvider)
-                              .addCommentToColonia(colonia.id, comment);
-                          if (success && context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content:
-                                      Text("Comentario agregado exitosamente")),
-                            );
-                            ref.invalidate(coloniaListProvider);
-                          } else if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content:
-                                      Text("Error al agregar el comentario")),
-                            );
-                          }
-                        }
+                              if (comment == null) {
+                                return;
+                              } else {
+                                final visitSuccess = await ref
+                                    .read(coloniaRepositoryProvider)
+                                    .markColoniaVisited(
+                                        colonia.id, DateTime.now());
+
+                                if (!visitSuccess) {
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              "Error al registrar la visita")),
+                                    );
+                                  }
+                                } else {
+                                  // Invalidar el estado para recargar la lista de colonias
+                                  ref.invalidate(coloniaListProvider);
+
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            "Visita registrada exitosamente"),
+                                      ),
+                                    );
+                                  }
+                                }
+                              }
+                              if (comment.isNotEmpty &&
+                                  comment != "sin comentario") {
+                                final success = await ref
+                                    .read(coloniaRepositoryProvider)
+                                    .addCommentToColonia(colonia.id, comment);
+                                if (success && context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "Comentario agregado exitosamente")),
+                                  );
+                                  ref.invalidate(coloniaListProvider);
+                                } else if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "Error al agregar el comentario")),
+                                  );
+                                }
+                              }
+                            },
+                          ),
+                        );
                       },
                     ),
-                  );
-                },
+                  ),
+                ],
               );
             },
             loading: () => const Center(

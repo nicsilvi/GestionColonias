@@ -57,7 +57,7 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
                   icon: const Icon(Icons.delete, color: Colors.red),
                   tooltip: "Eliminar Colonia",
                   onPressed: () async {
-                    await showDialog<bool>(
+                    final confirmDelete = await showDialog<bool>(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
@@ -77,6 +77,30 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
                         );
                       },
                     );
+                    if (confirmDelete == true) {
+                      // Llamar al repositorio para eliminar la colonia
+                      final success = await ref
+                          .read(coloniaRepositoryProvider)
+                          .deleteColonia(colonia.id);
+                      if (success) {
+                        // Invalidar el estado de la lista de colonias para recargar
+                        ref.invalidate(coloniaListProvider);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text("Colonia eliminada exitosamente")),
+                          );
+                        }
+                      } else {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Error al eliminar la colonia")),
+                          );
+                        }
+                      }
+                    }
                   },
                 ),
               );

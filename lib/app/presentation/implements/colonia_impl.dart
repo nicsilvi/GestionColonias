@@ -169,6 +169,21 @@ class ColoniaRepositoryImpl {
       return null;
     }
   }
+
+  Future<bool> markColoniaVisited(String coloniaId, DateTime visitDate) async {
+    try {
+      final doc = _firestore.collection('colonias').doc(coloniaId);
+      await doc.update({
+        'lastVisit':
+            Timestamp.fromDate(visitDate), // Guardar la fecha en formato ISO
+      });
+      print("Última visita registrada para la colonia $coloniaId");
+      return true;
+    } catch (e) {
+      print("Error al registrar la última visita: $e");
+      return false;
+    }
+  }
 }
 
 Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
@@ -211,6 +226,7 @@ Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
               final id = idController.text.trim();
               final description = descriptionController.text.trim();
               final address = addressController.text.trim();
+              //ToDo: address para obtener coordenadas o que directamente se pongan?
 
               if (id.isEmpty || description.isEmpty || address.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -233,6 +249,8 @@ Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
               final newColonia = ColoniaModel(
                 id: id,
                 createdAt: DateTime.now(),
+                description: description,
+                address: address,
                 location: GeoPoint(coordinates.latitude, coordinates.longitude),
                 cats: [],
                 comments: [],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
+import '../../core/constants/assets.dart';
 import '../controllers/auth_controller.dart';
 
 class Register extends ConsumerWidget {
@@ -31,7 +33,11 @@ class Register extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Registro:", style: Theme.of(context).textTheme.bodyLarge),
+                Lottie.asset(animationList[1],
+                    height: MediaQuery.of(context).size.height * 0.3),
+
+                Text("¡Regístrate gratis! 😻",
+                    style: Theme.of(context).textTheme.headlineLarge),
                 const SizedBox(height: 24),
                 TextFormField(
                   controller: nameController,
@@ -46,6 +52,7 @@ class Register extends ConsumerWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
                 TextFormField(
                   controller: lastnameController,
                   decoration: InputDecoration(
@@ -59,6 +66,8 @@ class Register extends ConsumerWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
+
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -72,6 +81,7 @@ class Register extends ConsumerWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
 
                 // Campo de contraseña
                 TextFormField(
@@ -116,7 +126,8 @@ class Register extends ConsumerWidget {
                       children: const [
                         TextSpan(
                           text: "Inicia sesión",
-                          style: TextStyle(color: Colors.greenAccent),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 42, 163, 105)),
                         ),
                       ],
                     ),

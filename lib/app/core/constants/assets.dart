@@ -17,3 +17,8 @@ final List<String> preselectedImages = [
   'assets/img/cat3.jpg',
   'assets/img/cat4.png',
 ];
+
+final List<String> animationList = [
+  'assets/animations/animationCat1.json',
+  'assets/animations/animationCat2.json',
+];

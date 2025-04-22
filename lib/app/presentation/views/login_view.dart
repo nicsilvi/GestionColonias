@@ -1,7 +1,8 @@
+import 'package:autentification/app/core/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:lottie/lottie.dart';
 import '../controllers/auth_controller.dart';
 import '../implements/authentication_impl.dart';
 
@@ -32,9 +33,15 @@ class LoginPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Inicio de sesión",
+                Lottie.asset(animationList[0],
+                    height: MediaQuery.of(context).size.height * 0.3),
+
+                Text("¡Bienvenido a MichiMap! 🐾",
+                    style: Theme.of(context).textTheme.headlineLarge),
+                const SizedBox(height: 12),
+                Text("¿Ya tienes cuenta? Inicia sesión",
                     style: Theme.of(context).textTheme.bodyLarge),
-                const SizedBox(height: 24),
+                const SizedBox(height: 12),
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -48,7 +55,7 @@ class LoginPage extends ConsumerWidget {
                     ),
                   ),
                 ),
-
+                const SizedBox(height: 8),
                 // Campo de contraseña
                 TextFormField(
                   controller: passwordController,
@@ -101,7 +108,8 @@ class LoginPage extends ConsumerWidget {
                       children: const [
                         TextSpan(
                           text: "Regístrate",
-                          style: TextStyle(color: Colors.greenAccent),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 47, 173, 112)),
                         ),
                       ],
                     ),

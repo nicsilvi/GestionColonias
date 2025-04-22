@@ -34,10 +34,56 @@ class MapaColonias extends ConsumerWidget {
                 height: 40.0,
                 point: LatLng(
                     colonia.location.latitude, colonia.location.longitude),
-                child: const Icon(
-                  Icons.location_on,
-                  color: Color.fromARGB(255, 243, 33, 33),
-                  size: 30,
+                child: GestureDetector(
+                  onTap: () {
+                    // Mostrar ventana emergente con detalles de la colonia
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white, // Fondo blanco
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Colonia: ${colonia.id}",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge),
+                                const SizedBox(height: 2),
+                                Text(
+                                  colonia.address,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "Número de gatos: ${colonia.cats.length}",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "Detalles: ${colonia.description}",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: const Icon(
+                    Icons.location_on,
+                    color: Color.fromARGB(255, 243, 33, 33),
+                    size: 30,
+                  ),
                 ),
               );
             }).toList();
