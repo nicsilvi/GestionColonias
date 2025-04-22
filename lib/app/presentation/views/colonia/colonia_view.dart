@@ -63,7 +63,7 @@ class ColoniaDetails extends ConsumerWidget {
                                   newComment = value;
                                 },
                                 decoration: const InputDecoration(
-                                  hintText: "Escribe tu comentario aquí",
+                                  hintText: "Escr ibe tu comentario aquí",
                                 ),
                               ),
                               actions: [
