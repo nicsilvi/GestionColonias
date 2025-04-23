@@ -8,121 +8,133 @@ class AppTheme {
   // Light theme  ---------------------------------------------------------------------------------------------
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     //al ser copywith solo se modifica lo especificado aqui
-    primaryColor: const Color.fromARGB(255, 146, 4, 82),
-    primaryColorDark: Colors.black,
-    scaffoldBackgroundColor: const Color.fromARGB(255, 247, 216, 238),
+    primaryColor: AppColors.primary,
+    scaffoldBackgroundColor: AppColors.background,
     appBarTheme: const AppBarTheme(
-      color: AppColors.lightBg,
-      iconTheme: IconThemeData(color: Color.fromARGB(255, 87, 84, 84)),
+      color: AppColors.surface,
+      iconTheme: IconThemeData(color: AppColors.accent),
       titleTextStyle: TextStyle(
-        color: AppColors.dark,
+        color: AppColors.primary,
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
       elevation: 4, // Un poco de sombra para el appBar
     ),
     drawerTheme: const DrawerThemeData(
-      backgroundColor: Color.fromARGB(255, 199, 185, 185),
+      backgroundColor: AppColors.surface,
       scrimColor: Color.fromARGB(137, 245, 235, 235),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Color.fromARGB(45, 228, 52, 252)),
-
+        backgroundColor: AppColors.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        )),
+    dialogTheme: const DialogTheme(
+      backgroundColor: AppColors.surface, // Definiendo el fondo del diálogo
+      titleTextStyle: TextStyle(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.bold,
+      ),
+      contentTextStyle: TextStyle(
+        color: AppColors.textPrimary,
+      ),
+    ),
     // Text styles
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(
-          color: Color.fromARGB(179, 0, 0, 0), fontSize: 16), // Texto normal
+      bodyLarge:
+          TextStyle(color: AppColors.textPrimary, fontSize: 16), // Texto normal
       bodyMedium: TextStyle(
-          color: Color.fromARGB(137, 0, 0, 0),
-          fontSize: 14), // Texto más pequeño
+          color: AppColors.textSecondary, fontSize: 14), // Texto más pequeño
       headlineLarge: TextStyle(
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: AppColors.primary,
           fontSize: 32,
           fontWeight: FontWeight.bold), // Títulos grandes
       headlineMedium: TextStyle(
-          color: Color.fromARGB(179, 0, 0, 0),
+          color: AppColors.textPrimary,
           fontSize: 28,
           fontWeight: FontWeight.w500), // Subtítulos
     ),
-    iconTheme: const IconThemeData(
-        color: Color.fromARGB(255, 8, 8, 8)), // Íconos blancos
+    iconTheme: const IconThemeData(color: AppColors.accent),
     buttonTheme: const ButtonThemeData(
       buttonColor: Color(0xFF6200EE),
     ),
     colorScheme: const ColorScheme.dark(
-      primary: Color.fromARGB(255, 243, 17, 142),
+      primary: AppColors.primary,
+      secondary: AppColors.secondary,
+    ),
+
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.accent,
+      foregroundColor: Colors.white,
     ),
     // Ajuste del color de los elementos deseleccionados (como Checkboxes, etc)
-    unselectedWidgetColor: const Color.fromARGB(179, 55, 10, 114),
+    unselectedWidgetColor: AppColors.secondary,
   );
 
   // darktheme  ---------------------------------------------------------------------------------------------
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
-    primaryColor: const Color.fromARGB(255, 223, 154, 5),
-    primaryColorDark: const Color.fromARGB(255, 255, 255, 255),
-    scaffoldBackgroundColor: const Color.fromARGB(255, 66, 66, 66),
+    primaryColor: AppColors.primaryDark,
+    scaffoldBackgroundColor: AppColors.backgroundDark,
     appBarTheme: const AppBarTheme(
-      color: Color.fromARGB(255, 0, 0, 0),
-      iconTheme: IconThemeData(color: Color.fromARGB(255, 197, 191, 191)),
+      color: AppColors.surface,
+      iconTheme: IconThemeData(color: AppColors.accentDark),
       titleTextStyle: TextStyle(
-        color: Color.fromARGB(255, 236, 174, 2),
+        color: AppColors.primaryDark,
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
-      elevation: 12,
+      elevation: 4, // Un poco de sombra para el appBar
     ),
     drawerTheme: const DrawerThemeData(
-      backgroundColor: AppColors.dark2,
-      scrimColor: Color(0x8A000000),
+      backgroundColor: AppColors.surfaceDark,
+      scrimColor: Color.fromARGB(137, 245, 235, 235),
     ),
-    colorScheme: const ColorScheme.dark(
-      primary: Color.fromARGB(255, 37, 128, 2),
-    ),
-
     bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Color.fromARGB(255, 110, 107, 109)),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Color.fromARGB(255, 223, 154, 5), // Amarillo
-      foregroundColor: Colors.black, // Color del ícono
-    ),
+        backgroundColor: AppColors.surfaceDark,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        )),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color.fromARGB(255, 66, 66, 66),
+      backgroundColor: AppColors.surfaceDark, // Definiendo el fondo del diálogo
       titleTextStyle: TextStyle(
-        color: Color.fromARGB(255, 223, 154, 5),
-        fontSize: 22,
+        color: AppColors.primaryDark,
         fontWeight: FontWeight.bold,
       ),
       contentTextStyle: TextStyle(
-        color: Colors.white70,
-        fontSize: 16,
+        color: AppColors.textPrimaryDark,
       ),
     ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 223, 154, 5),
-        foregroundColor: Colors.black,
-        textStyle: const TextStyle(fontSize: 16),
-      ),
-    ),
+
     // Text styles
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white70, fontSize: 16), // Texto normal
-      bodyMedium:
-          TextStyle(color: Colors.white54, fontSize: 14), // Texto más pequeño
+      bodyLarge: TextStyle(
+          color: AppColors.textPrimaryDark, fontSize: 16), // Texto normal
+      bodyMedium: TextStyle(
+          color: AppColors.textSecondaryDark,
+          fontSize: 14), // Texto más pequeño
       headlineLarge: TextStyle(
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: AppColors.primaryDark,
           fontSize: 32,
           fontWeight: FontWeight.bold), // Títulos grandes
       headlineMedium: TextStyle(
-          color: Colors.white70,
+          color: AppColors.textPrimaryDark,
           fontSize: 28,
           fontWeight: FontWeight.w500), // Subtítulos
     ),
-    iconTheme: const IconThemeData(color: Color.fromARGB(255, 255, 255, 255)),
+    iconTheme: const IconThemeData(color: AppColors.accentDark),
     buttonTheme: const ButtonThemeData(
-      buttonColor: Color.fromARGB(255, 209, 182, 27),
+      buttonColor: Color(0xFF6200EE),
+    ),
+    colorScheme: const ColorScheme.dark(
+      primary: AppColors.primaryDark,
+      secondary: AppColors.secondaryDark,
+    ),
+
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.accentDark,
+      foregroundColor: Colors.black,
     ),
     // Ajuste del color de los elementos deseleccionados (como Checkboxes, etc)
-    unselectedWidgetColor: Colors.white70,
+    unselectedWidgetColor: AppColors.textSecondaryDark,
   );
 }

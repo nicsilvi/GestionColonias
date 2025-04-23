@@ -44,8 +44,22 @@ class LoginPage extends ConsumerWidget {
                 const SizedBox(height: 12),
                 TextFormField(
                   controller: emailController,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                   decoration: InputDecoration(
                     labelText: "Correo electrónico",
+                    labelStyle: TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge?.color),
+                    prefixIcon: Icon(Icons.email,
+                        color: Theme.of(context).primaryColor),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 2.0,
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: BorderSide(
@@ -62,6 +76,17 @@ class LoginPage extends ConsumerWidget {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: "Contraseña",
+                    labelStyle: TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge?.color),
+                    prefixIcon:
+                        Icon(Icons.lock, color: Theme.of(context).primaryColor),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 2.0,
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: BorderSide(
@@ -105,11 +130,14 @@ class LoginPage extends ConsumerWidget {
                     text: TextSpan(
                       text: "¿No tienes cuenta?   ",
                       style: TextStyle(color: Theme.of(context).primaryColor),
-                      children: const [
+                      children: [
                         TextSpan(
                           text: "Regístrate",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 47, 173, 112)),
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                         ),
                       ],
                     ),

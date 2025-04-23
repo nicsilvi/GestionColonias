@@ -21,8 +21,13 @@ class _HomeviewState extends ConsumerState<HomeView> {
 
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text("Bienvenido, ${userLoaderState.value?.firstName ?? "User"}"),
+        title: Text(
+          "Bienvenido, ${userLoaderState.value?.firstName ?? "User"}",
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(color: Theme.of(context).colorScheme.primary),
+        ),
       ),
       endDrawer: const DrawerMenu(),
       body: Center(

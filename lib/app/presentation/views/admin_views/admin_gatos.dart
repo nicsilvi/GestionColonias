@@ -38,6 +38,7 @@ class _AdminGatosState extends ConsumerState<AdminGatos> {
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
                   elevation: 4,
+                  color: Theme.of(context).colorScheme.secondary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
@@ -77,6 +78,30 @@ class _AdminGatosState extends ConsumerState<AdminGatos> {
                         Text(
                           'Colonia ID: ${cat.coloniaId}',
                           style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Sexo: ${cat.sexo}',
+                          style: const TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '¿Castrado?: ${cat.castrado == null ? "Sin especificar" : (cat.castrado! ? "Sí" : "No")}',
+                          style: const TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '¿Vacunado?: ${cat.vacunado == null ? "Sin especificar" : (cat.vacunado! ? "Sí" : "No")}',
+                          style: const TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Último comentario: ${cat.comments?.isNotEmpty == true ? cat.comments?.last : "Sin comentarios"}',
+                          style: const TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 16),
                         // Botones de acción

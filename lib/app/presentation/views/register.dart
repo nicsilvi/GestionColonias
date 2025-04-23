@@ -41,8 +41,23 @@ class Register extends ConsumerWidget {
                 const SizedBox(height: 24),
                 TextFormField(
                   controller: nameController,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                   decoration: InputDecoration(
                     labelText: "Nombre",
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                    prefixIcon: Icon(Icons.person,
+                        color: Theme.of(context).primaryColor),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 2.0,
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: BorderSide(
@@ -55,8 +70,23 @@ class Register extends ConsumerWidget {
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: lastnameController,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                   decoration: InputDecoration(
                     labelText: "Apellidos",
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                    prefixIcon: Icon(Icons.badge,
+                        color: Theme.of(context).primaryColor),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 2.0,
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: BorderSide(
@@ -70,8 +100,23 @@ class Register extends ConsumerWidget {
 
                 TextFormField(
                   controller: emailController,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                   decoration: InputDecoration(
                     labelText: "Correo electrónico",
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                    prefixIcon: Icon(Icons.email,
+                        color: Theme.of(context).primaryColor),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 2.0,
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: BorderSide(
@@ -86,9 +131,24 @@ class Register extends ConsumerWidget {
                 // Campo de contraseña
                 TextFormField(
                   controller: passwordController,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: "Contraseña",
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                    prefixIcon:
+                        Icon(Icons.lock, color: Theme.of(context).primaryColor),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 2.0,
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: BorderSide(
@@ -123,11 +183,14 @@ class Register extends ConsumerWidget {
                     text: TextSpan(
                       text: "¿Ya tienes cuenta?   ",
                       style: TextStyle(color: Theme.of(context).primaryColor),
-                      children: const [
+                      children: [
                         TextSpan(
                           text: "Inicia sesión",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 42, 163, 105)),
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                         ),
                       ],
                     ),

@@ -21,21 +21,27 @@ class DrawerMenu extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                decoration:
-                    BoxDecoration(color: Theme.of(context).primaryColor),
-                child: const SizedBox(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: SizedBox(
                   width: double.infinity,
                   child: Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text("Menú",
-                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontSize: 20)),
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               ListTile(
-                leading: const Icon(Icons.person),
-                title: const Text("Mi Perfil"),
+                leading: Icon(Icons.person,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text("Mi Perfil",
+                    style: Theme.of(context).textTheme.bodyLarge),
                 onTap: () {
                   //ir al profileview
                   context.pop();
@@ -44,8 +50,10 @@ class DrawerMenu extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
               ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text("Settings"),
+                leading: Icon(Icons.settings,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text("Settings",
+                    style: Theme.of(context).textTheme.bodyLarge),
                 onTap: () {
                   context.pop();
                   //ir a la vista de settings
@@ -54,9 +62,10 @@ class DrawerMenu extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
               ListTile(
-                leading:
-                    Icon(themeService ? Icons.light_mode : Icons.dark_mode),
-                title: Text(themeService ? "Modo claro" : "Modo oscuro"),
+                leading: Icon(themeService ? Icons.light_mode : Icons.dark_mode,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text(themeService ? "Modo claro" : "Modo oscuro",
+                    style: Theme.of(context).textTheme.bodyLarge),
                 onTap: () {
                   context.pop();
                   ref.read(themeControllerProvider.notifier).updateTheme();
@@ -68,8 +77,10 @@ class DrawerMenu extends ConsumerWidget {
                 endIndent: 20,
               ),
               ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text("Cerrar sesión"),
+                leading: Icon(Icons.logout,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text("Cerrar sesión",
+                    style: Theme.of(context).textTheme.bodyLarge),
                 onTap: () async {
                   if (!context.mounted) return;
                   print("cerrar sesion");

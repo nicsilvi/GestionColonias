@@ -195,23 +195,83 @@ Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text("Agregar Nueva Colonia"),
+        backgroundColor: Theme.of(context).dialogTheme.backgroundColor,
+        title: Text(
+          "Agregar Nueva Colonia",
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+        ),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: idController,
-                decoration:
-                    const InputDecoration(labelText: "ID de la Colonia"),
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color),
+                decoration: InputDecoration(
+                  labelText: "ID de la Colonia",
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
               ),
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(labelText: "Descripción"),
-              ),
+              const SizedBox(height: 16),
               TextField(
                 controller: addressController,
-                decoration: const InputDecoration(labelText: "Dirección"),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                ),
+                decoration: InputDecoration(
+                  labelText: "Descripción",
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: addressController,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                ),
+                decoration: InputDecoration(
+                  labelText: "Dirección",
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

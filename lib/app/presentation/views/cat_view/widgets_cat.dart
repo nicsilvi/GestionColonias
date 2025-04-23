@@ -19,7 +19,7 @@ class GatoCard extends ConsumerWidget {
         child: AspectRatio(
             aspectRatio: 3 / 4,
             child: Card(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.secondary,
               elevation: 2,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
