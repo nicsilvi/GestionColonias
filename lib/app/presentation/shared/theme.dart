@@ -46,12 +46,12 @@ class AppTheme {
       bodyMedium: TextStyle(
           color: AppColors.textSecondary, fontSize: 14), // Texto más pequeño
       headlineLarge: TextStyle(
-          color: AppColors.primary,
+          color: AppColors.accent,
           fontSize: 32,
           fontWeight: FontWeight.bold), // Títulos grandes
       headlineMedium: TextStyle(
           color: AppColors.textPrimary,
-          fontSize: 28,
+          fontSize: 20,
           fontWeight: FontWeight.w500), // Subtítulos
     ),
     iconTheme: const IconThemeData(color: AppColors.accent),
@@ -59,7 +59,7 @@ class AppTheme {
       buttonColor: Color(0xFF6200EE),
     ),
     colorScheme: const ColorScheme.dark(
-      primary: AppColors.primary,
+      primary: AppColors.accent,
       secondary: AppColors.secondary,
     ),
 
@@ -68,12 +68,12 @@ class AppTheme {
       foregroundColor: Colors.white,
     ),
     // Ajuste del color de los elementos deseleccionados (como Checkboxes, etc)
-    unselectedWidgetColor: AppColors.secondary,
+    unselectedWidgetColor: const Color.fromARGB(255, 163, 160, 160),
   );
 
   // darktheme  ---------------------------------------------------------------------------------------------
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
-    primaryColor: AppColors.primaryDark,
+    primaryColor: const Color.fromARGB(255, 243, 186, 80),
     scaffoldBackgroundColor: AppColors.backgroundDark,
     appBarTheme: const AppBarTheme(
       color: AppColors.surface,
@@ -112,21 +112,24 @@ class AppTheme {
       bodyMedium: TextStyle(
           color: AppColors.textSecondaryDark,
           fontSize: 14), // Texto más pequeño
+      bodySmall:
+          TextStyle(color: Color.fromARGB(255, 92, 88, 88), fontSize: 14),
       headlineLarge: TextStyle(
           color: AppColors.primaryDark,
           fontSize: 32,
           fontWeight: FontWeight.bold), // Títulos grandes
       headlineMedium: TextStyle(
           color: AppColors.textPrimaryDark,
-          fontSize: 28,
+          fontSize: 20,
           fontWeight: FontWeight.w500), // Subtítulos
     ),
+
     iconTheme: const IconThemeData(color: AppColors.accentDark),
     buttonTheme: const ButtonThemeData(
       buttonColor: Color(0xFF6200EE),
     ),
     colorScheme: const ColorScheme.dark(
-      primary: AppColors.primaryDark,
+      primary: Color.fromARGB(255, 245, 179, 58),
       secondary: AppColors.secondaryDark,
     ),
 
@@ -135,6 +138,6 @@ class AppTheme {
       foregroundColor: Colors.black,
     ),
     // Ajuste del color de los elementos deseleccionados (como Checkboxes, etc)
-    unselectedWidgetColor: AppColors.textSecondaryDark,
+    unselectedWidgetColor: const Color.fromARGB(255, 56, 55, 55),
   );
 }

@@ -37,6 +37,7 @@ class _HomeviewState extends ConsumerState<HomeView> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Expanded(
+              flex: 2,
               child: ListView(
                 children: [
                   Row(
@@ -143,7 +144,7 @@ class _HomeviewState extends ConsumerState<HomeView> {
               ),
             ),
             Expanded(
-              flex: 4,
+              flex: 5,
               child: Container(
                 padding: const EdgeInsets.all(16.0),
                 child: const MapaColonias(),

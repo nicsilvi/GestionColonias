@@ -74,12 +74,45 @@ flutter:
 
   assets:
     - assets/img/avatar1.png
-    - assets/img/avatar2.jpg
+    - assets/img/avatar2.png
     - assets/img/avatar3.png
-    - assets/img/cat1.png
-    - assets/img/cat2.png
+    - assets/img/avatar4.png
+    - assets/img/avatar5.png
+    - assets/img/avatar6.png
+    - assets/img/avatar7.png
+    - assets/img/avatar8.png
+    - assets/img/avatar9.png
+    - assets/img/avatar10.png
+    - assets/img/avatar11.png
+    - assets/img/avatar12.png
+    - assets/img/cat1.jpg
+    - assets/img/cat2.jpg
     - assets/img/cat3.jpg
-    - assets/img/cat4.png
+    - assets/img/cat4.jpg
+    - assets/img/cat5.jpg
+    - assets/img/cat6.jpg
+    - assets/img/cat7.jpg
+    - assets/img/cat8.jpg
+    - assets/img/cat9.jpg
+    - assets/img/cat10.jpg
+    - assets/img/cat11.jpg
+    - assets/img/cat12.jpg
+    - assets/img/cat13.jpg
+    - assets/img/cat14.jpg
+    - assets/img/cat15.jpg
+    - assets/img/cat16.jpg
+    - assets/img/cat17.jpg
+    - assets/img/cat18.jpg
+    - assets/img/cat19.jpg
+    - assets/img/cat20.jpg
+    - assets/img/cat21.jpg
+    - assets/img/cat22.jpg
+    - assets/img/cat23.jpg
+    - assets/img/cat24.jpg
+    - assets/img/cat25.jpg
+    - assets/img/cat26.jpg
+    - assets/img/cat27.jpg
+    - assets/img/cat28.jpg
     - assets/animations/animationCat1.json
     - assets/animations/animationCat2.json
   #   - images/a_dot_burr.jpeg

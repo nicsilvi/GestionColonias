@@ -12,21 +12,32 @@ class GatoCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-        onTap: () {
-          _mostrarDetallesGato(
-              context, catModel); // Al hacer clic se muestran los detalles
-        },
-        child: AspectRatio(
-            aspectRatio: 3 / 4,
-            child: Card(
-              color: Theme.of(context).colorScheme.secondary,
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 3,
+      onTap: () {
+        _mostrarDetallesGato(
+            context, catModel); // Al hacer clic se muestran los detalles
+      },
+      child: AspectRatio(
+        aspectRatio: 3 / 4,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
@@ -35,32 +46,36 @@ class GatoCard extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  //const SizedBox(height: 8),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment
-                          .spaceBetween, // Espaciado entre los elementos
-                      children: [
-                        Expanded(
-                          child: Text(
-                            capitalize(catModel.name),
-                            textAlign: TextAlign.center,
-                          ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment
+                        .spaceBetween, // Espaciado entre los elementos
+                    children: [
+                      Expanded(
+                        child: Text(
+                          capitalize(catModel.name),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 16),
+                          textAlign: TextAlign.center,
                         ),
-                        IconButton(
-                          onPressed: () {
-                            dialogoComentario(context, catModel, ref);
-                          },
-                          icon: const Icon(Icons.comment),
-                        ),
-                      ],
-                    ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          dialogoComentario(context, catModel, ref);
+                        },
+                        icon: const Icon(Icons.comment),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )));
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   // Función para mostrar los detalles del gato

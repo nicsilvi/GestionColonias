@@ -229,7 +229,7 @@ Future<ColoniaModel?> showAddColoniaDialog(BuildContext context) async {
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: addressController,
+                controller: descriptionController,
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium?.color,
                 ),

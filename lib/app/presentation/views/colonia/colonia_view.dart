@@ -109,8 +109,14 @@ class ColoniaDetails extends ConsumerWidget {
                                             onChanged: (value) {
                                               newComment = value;
                                             },
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               hintText: "¿Cómo fue tu visita?",
+                                              hintStyle: TextStyle(
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.color, // Color del hintText
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -130,6 +136,11 @@ class ColoniaDetails extends ConsumerWidget {
                                           ),
                                           const SizedBox(height: 8),
                                           TextButton(
+                                            style: TextButton.styleFrom(
+                                              foregroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .error,
+                                            ),
                                             onPressed: () =>
                                                 Navigator.pop(context, null),
                                             child: const Text("Cancelar"),

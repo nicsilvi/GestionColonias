@@ -6,7 +6,7 @@ class AppColors {
   static const Color error = Colors.red;
 
   // Light mode ------------------------------------------------
-  static const primary = Color.fromARGB(255, 228, 154, 16); // Mostaza vibrante
+  static const primary = Color.fromARGB(255, 51, 50, 48); // Mostaza vibrante
   static const secondary = Color(0xFF6C6C6C); // Gris medio elegante
   static const background =
       Color.fromARGB(255, 247, 245, 238); // Beige claro casi blanco

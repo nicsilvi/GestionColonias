@@ -67,9 +67,7 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
                 child: ListTile(
                   leading: CircleAvatar(
                       backgroundColor: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.color, //poner algo mas transparente?
+                          .unselectedWidgetColor, //poner algo mas transparente?
                       child: Icon(
                         Icons.location_on,
                         size: 20,

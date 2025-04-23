@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../controllers/cat_controller.dart';
 import '../../controllers/colonia_controller.dart';
+import '../../shared/utils.dart';
 
 class AdminGatos extends ConsumerStatefulWidget {
   const AdminGatos({super.key});
@@ -30,171 +31,260 @@ class _AdminGatosState extends ConsumerState<AdminGatos> {
           if (catList.isEmpty) {
             return const Center(child: Text("No hay gatos disponibles"));
           }
+
           return ListView.builder(
             itemCount: catList.length,
             itemBuilder: (context, index) {
               final cat = catList[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  elevation: 4,
-                  color: Theme.of(context).colorScheme.secondary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Imagen del gato
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(16.0),
-                          child: Image.asset(
-                            cat.profileImage,
-                            height: 150,
-                            width: double.infinity,
-                            fit: BoxFit.contain,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Icon(Icons.broken_image, size: 150);
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        // Información del gato
-                        Text(
-                          cat.name,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Edad: ${DateTime.now().year - cat.age.year} años',
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Colonia ID: ${cat.coloniaId}',
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Sexo: ${cat.sexo}',
-                          style: const TextStyle(fontSize: 16),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '¿Castrado?: ${cat.castrado == null ? "Sin especificar" : (cat.castrado! ? "Sí" : "No")}',
-                          style: const TextStyle(fontSize: 16),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '¿Vacunado?: ${cat.vacunado == null ? "Sin especificar" : (cat.vacunado! ? "Sí" : "No")}',
-                          style: const TextStyle(fontSize: 16),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Último comentario: ${cat.comments?.isNotEmpty == true ? cat.comments?.last : "Sin comentarios"}',
-                          style: const TextStyle(fontSize: 16),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        // Botones de acción
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () async {
-                                final confirm = await showDialog<bool>(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title:
-                                          const Text("Confirmar eliminación"),
-                                      content: const Text(
-                                          "¿Estás seguro de que deseas eliminar este gato?"),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context, false),
-                                          child: const Text("Cancelar"),
-                                        ),
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context, true),
-                                          child: const Text("Eliminar"),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-
-                                if (confirm == true) {
-                                  // Eliminar el gato
-                                  final success = await ref
-                                      .read(catRepositoryProvider)
-                                      .deleteCat(cat.id);
-
-                                  if (success) {
-                                    // Si el gato pertenece a una colonia, actualizar la colonia
-                                    if (cat.coloniaId != null) {
-                                      await ref
-                                          .read(coloniaRepositoryProvider)
-                                          .removeCatFromColonia(
-                                              cat.coloniaId!, cat.id);
-                                      ref.invalidate(coloniaListProvider);
-                                    }
-
-                                    // Mostrar mensaje de éxito
-                                    if (!context.mounted) return;
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              "Gato eliminado exitosamente")),
-                                    );
-                                    ref.invalidate(catListProvider);
-                                  } else {
-                                    if (!context.mounted) return;
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              "Error al eliminar el gato")),
-                                    );
-                                  }
-                                }
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisSize: MainAxisSize
+                            .min, // Alinear el texto en la parte inferior
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16.0),
+                            child: Image.asset(
+                              cat.profileImage,
+                              height: 150,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(Icons.broken_image,
+                                    size: 150);
                               },
-                              icon: const Icon(Icons.delete),
-                              label: const Text("Borrar"),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16.0),
+                                color: Theme.of(context).colorScheme.secondary),
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Text(
+                              capitalize(cat.name),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge
+                                    ?.color,
+                                fontSize: 19,
                               ),
                             ),
-                            ElevatedButton.icon(
-                              onPressed: () {
-                                // Lógica para agregar información
-                                //_addInfo(context, cat);
-                              },
-                              icon: const Icon(Icons.info),
-                              label: const Text("Agregar Info"),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () {
-                                // Lógica para mover de colonia
-                                // _moveCat(context, cat);
-                              },
-                              icon: const Icon(Icons.swap_horiz),
-                              label: const Text("Mover de colonia"),
-                            ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      flex: 3,
+                      child: Card(
+                        elevation: 4,
+                        color: Theme.of(context).colorScheme.secondary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16.0),
+                            gradient: LinearGradient(
+                              colors: [
+                                Theme.of(context).colorScheme.primary,
+                                Theme.of(context).colorScheme.secondary
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Información del gato
+                              const Text(
+                                "Ficha:",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1, // Ocupa la mitad del espacio
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Edad: ${DateTime.now().year - cat.age.year} años',
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Colonia ID: ${cat.coloniaId}',
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Sexo: ${cat.sexo}',
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 8),
+                                        ]),
+                                  ),
+                                  Expanded(
+                                    flex: 1, // Ocupa la otra mitad del espacio
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '¿Castrado?: ${cat.castrado == null ? "Sin especificar" : (cat.castrado! ? "Sí" : "No")}',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          '¿Vacunado?: ${cat.vacunado == null ? "Sin especificar" : (cat.vacunado! ? "Sí" : "No")}',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          'Último comentario: ${cat.comments?.isNotEmpty == true ? cat.comments?.last : "Sin comentarios"}',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              // Botones de acción
+                              Wrap(
+                                spacing:
+                                    8.0, // Espaciado horizontal entre botones
+                                runSpacing: 8.0,
+                                alignment: WrapAlignment.spaceBetween,
+                                children: [
+                                  ElevatedButton.icon(
+                                    onPressed: () async {
+                                      final confirm = await showDialog<bool>(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: const Text(
+                                                "Confirmar eliminación"),
+                                            content: const Text(
+                                                "¿Estás seguro de que deseas eliminar este gato?"),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, false),
+                                                child: const Text("Cancelar"),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, true),
+                                                child: const Text("Eliminar"),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+
+                                      if (confirm == true) {
+                                        // Eliminar el gato
+                                        final success = await ref
+                                            .read(catRepositoryProvider)
+                                            .deleteCat(cat.id);
+
+                                        if (success) {
+                                          // Si el gato pertenece a una colonia, actualizar la colonia
+                                          if (cat.coloniaId != null) {
+                                            await ref
+                                                .read(coloniaRepositoryProvider)
+                                                .removeCatFromColonia(
+                                                    cat.coloniaId!, cat.id);
+                                            ref.invalidate(coloniaListProvider);
+                                          }
+
+                                          // Mostrar mensaje de éxito
+                                          if (!context.mounted) return;
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    "Gato eliminado exitosamente")),
+                                          );
+                                          ref.invalidate(catListProvider);
+                                        } else {
+                                          if (!context.mounted) return;
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    "Error al eliminar el gato")),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    icon: const Icon(Icons.delete,
+                                        color: Colors.black),
+                                    label: const Text(
+                                      "Borrar",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  ),
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      // Lógica para agregar información
+                                      //_addInfo(context, cat);
+                                    },
+                                    icon: const Icon(Icons.info),
+                                    label: const Text("Agregar Info"),
+                                  ),
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      // Lógica para mover de colonia
+                                      // _moveCat(context, cat);
+                                    },
+                                    icon: const Icon(Icons.swap_horiz),
+                                    label: const Text("Mover de colonia"),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
