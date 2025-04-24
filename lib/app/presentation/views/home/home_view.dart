@@ -150,7 +150,7 @@ class _HomeviewState extends ConsumerState<HomeView> {
                 child: const MapaColonias(),
               ),
             ),
-            //if (!kIsWeb) //ponerlo al final, para ver el estilo movil.
+            //if (!kIsWeb) //ponerlo al final, para seguir viendo el estilo movil.
             Column(
               children: [
                 Row(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../controllers/colonia_controller.dart';
 import '../../controllers/router_controller.dart';
+import '../../shared/utils.dart';
 
 class ColoniaFloatingButtons extends StatelessWidget {
   final dynamic user; // El usuario actual
@@ -55,7 +56,12 @@ class ColoniaFloatingButtons extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final colonia = availableColonias[index];
                                   return ListTile(
-                                    title: Text(colonia.id),
+                                    title: Text(capitalize(colonia.id),
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headlineMedium
+                                                ?.color)),
                                     onTap: () {
                                       Navigator.pop(
                                           context,
@@ -151,7 +157,12 @@ class ColoniaFloatingButtons extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final colonia = userColonias.value![index];
                                   return ListTile(
-                                    title: Text(colonia.id),
+                                    title: Text(capitalize(colonia.id),
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headlineMedium
+                                                ?.color)),
                                     onTap: () {
                                       Navigator.pop(context, colonia.id);
                                     },

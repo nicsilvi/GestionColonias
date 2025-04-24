@@ -85,7 +85,7 @@ class ColoniaDetails extends ConsumerWidget {
                                   style:
                                       Theme.of(context).textTheme.bodyMedium),
                               trailing: IconButton(
-                                icon: Icon(Icons.plus_one_rounded,
+                                icon: Icon(Icons.assignment_turned_in_outlined,
                                     size: 30,
                                     color: Theme.of(context).iconTheme.color),
                                 tooltip: "Marcar colonia visitada",
@@ -124,15 +124,19 @@ class ColoniaDetails extends ConsumerWidget {
                                           TextButton(
                                             onPressed: () => Navigator.pop(
                                                 context, "sin comentario"),
-                                            child: const Text(
-                                                "Visita sin comentario"),
+                                            child: Text("Visita sin comentario",
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor)),
                                           ),
                                           const SizedBox(height: 8),
                                           TextButton(
                                             onPressed: () => Navigator.pop(
                                                 context, newComment),
-                                            child: const Text(
-                                                "Agregar comentario"),
+                                            child: Text("Agregar comentario",
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor)),
                                           ),
                                           const SizedBox(height: 8),
                                           TextButton(

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/models/cat_model.dart';
+import 'colonia_impl.dart';
 
 class CatRepositoryImpl {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -28,6 +29,29 @@ class CatRepositoryImpl {
       return true;
     } catch (e) {
       print("Error al agregar el gato: $e");
+      return false;
+    }
+  }
+
+  Future<bool> moveCatToAnotherColonia(
+      String fromColoniaId, String toColoniaId, String catId) async {
+    try {
+      final coloniaImpl = ColoniaRepositoryImpl();
+
+      final removed =
+          await coloniaImpl.removeCatFromColonia(fromColoniaId, catId);
+      if (!removed) {
+        return false;
+      }
+
+      final added = await coloniaImpl.addCatToColonia(toColoniaId, catId);
+      if (!added) {
+        await coloniaImpl.addCatToColonia(fromColoniaId, catId);
+        return false;
+      }
+      return true;
+    } catch (e) {
+      print("Error al mover el gato entre colonias: $e");
       return false;
     }
   }

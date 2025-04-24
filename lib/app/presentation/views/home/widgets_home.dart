@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
+
+import '../../controllers/router_controller.dart';
 
 class MapaColonias extends ConsumerWidget {
   const MapaColonias({super.key});
@@ -11,6 +14,7 @@ class MapaColonias extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final coloniaListAsync = ref.watch(coloniaListProvider);
+    final userLoaderState = ref.watch(userLoaderFutureProvider);
 
     return Container(
       width: double.infinity,
@@ -40,39 +44,152 @@ class MapaColonias extends ConsumerWidget {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return Dialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.all(16.0),
-                            decoration: BoxDecoration(
-                              color: Colors.white, // Fondo blanco
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16.0),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .unselectedWidgetColor,
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Colonia: ${colonia.id}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          "¿Quieres ser voluntario de esta colonia?",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                Navigator.of(context)
+                                                    .pop(); // Cerrar el diálogo antes de realizar la acción
+
+                                                // Obtener el usuario actual
+                                                final user =
+                                                    userLoaderState.whenOrNull(
+                                                  data: (user) => user,
+                                                );
+                                                // Intentar asignar la colonia al usuario
+                                                final success = await ref
+                                                    .read(
+                                                        coloniaRepositoryProvider)
+                                                    .assignColoniaToUser(
+                                                        user!.id, colonia.id);
+
+                                                if (!context.mounted) return;
+
+                                                if (success) {
+                                                  // Mostrar mensaje de éxito
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          "Colonia asignada exitosamente"),
+                                                    ),
+                                                  );
+
+                                                  // Invalidar los proveedores para actualizar la lista de colonias y el usuario
+                                                  ref.invalidate(
+                                                      coloniaListProvider);
+                                                  ref.invalidate(
+                                                      userLoaderFutureProvider);
+                                                } else {
+                                                  // Mostrar mensaje de error
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          "Error al asignar la colonia"),
+                                                    ),
+                                                  );
+                                                }
+
+                                                // Navegar a la página de colonias
+                                                context.go('/home/colonia');
+                                              },
+                                              child: const Text("Aceptar"),
+                                            ),
+                                            const Spacer(),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text("Cancelar",
+                                                  style: TextStyle(
+                                                      color: Colors.red)),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Dialog(
+                            shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16.0),
                             ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Colonia: ${colonia.id}",
+                            child: Container(
+                              padding: EdgeInsets.all(16.0),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).unselectedWidgetColor,
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Colonia: ${colonia.id}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    colonia.address,
                                     style:
-                                        Theme.of(context).textTheme.bodyLarge),
-                                const SizedBox(height: 2),
-                                Text(
-                                  colonia.address,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  "Número de gatos: ${colonia.cats.length}",
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  "Detalles: ${colonia.description}",
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ],
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    "Número de gatos: ${colonia.cats.length}",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    "Detalles: ${colonia.description}",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -103,7 +220,7 @@ class MapaColonias extends ConsumerWidget {
                   options: MarkerClusterLayerOptions(
                     maxClusterRadius: 120,
                     disableClusteringAtZoom:
-                        16, // Desactivar clustering en zoom alto
+                        12, // Desactivar clustering en zoom alto
                     size: const Size(40, 40),
                     markers: markers,
                     builder: (context, cluster) {

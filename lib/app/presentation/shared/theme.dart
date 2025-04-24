@@ -30,7 +30,8 @@ class AppTheme {
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         )),
     dialogTheme: const DialogTheme(
-      backgroundColor: AppColors.surface, // Definiendo el fondo del diálogo
+      backgroundColor:
+          Color.fromARGB(255, 216, 214, 214), // Definiendo el fondo del diálogo
       titleTextStyle: TextStyle(
         color: AppColors.textPrimary,
         fontWeight: FontWeight.bold,
@@ -62,7 +63,7 @@ class AppTheme {
       primary: AppColors.accent,
       secondary: AppColors.secondary,
     ),
-
+    cardColor: const Color.fromARGB(255, 146, 145, 138),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: AppColors.accent,
       foregroundColor: Colors.white,
@@ -128,6 +129,7 @@ class AppTheme {
     buttonTheme: const ButtonThemeData(
       buttonColor: Color(0xFF6200EE),
     ),
+
     colorScheme: const ColorScheme.dark(
       primary: Color.fromARGB(255, 245, 179, 58),
       secondary: AppColors.secondaryDark,

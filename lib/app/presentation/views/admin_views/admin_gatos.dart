@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../controllers/cat_controller.dart';
 import '../../controllers/colonia_controller.dart';
 import '../../shared/utils.dart';
+import 'widgets2_admin_gatos.dart';
 
 class AdminGatos extends ConsumerStatefulWidget {
   const AdminGatos({super.key});
@@ -272,7 +273,7 @@ class _AdminGatosState extends ConsumerState<AdminGatos> {
                                   ElevatedButton.icon(
                                     onPressed: () {
                                       // Lógica para mover de colonia
-                                      // _moveCat(context, cat);
+                                      moveCat(context, cat, ref);
                                     },
                                     icon: const Icon(Icons.swap_horiz),
                                     label: const Text("Mover de colonia"),
