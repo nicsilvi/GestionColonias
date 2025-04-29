@@ -34,21 +34,41 @@ class CatRepositoryImpl {
   }
 
   Future<bool> moveCatToAnotherColonia(
-      String fromColoniaId, String toColoniaId, String catId) async {
+      String? fromColoniaId, String toColoniaId, CatModel cat) async {
     try {
       final coloniaImpl = ColoniaRepositoryImpl();
-
-      final removed =
-          await coloniaImpl.removeCatFromColonia(fromColoniaId, catId);
-      if (!removed) {
-        return false;
+      print("Colonia ID: $toColoniaId");
+      print("Gato ID: ${cat.id}");
+      print(coloniaImpl);
+      if (fromColoniaId != null) {
+        final removed =
+            await coloniaImpl.removeCatFromColonia(fromColoniaId, cat.id);
+        if (!removed) {
+          print("Error en remove gato");
+          return false;
+        }
       }
 
-      final added = await coloniaImpl.addCatToColonia(toColoniaId, catId);
+      final added = await coloniaImpl.addCatToColonia(toColoniaId, cat.id);
       if (!added) {
-        await coloniaImpl.addCatToColonia(fromColoniaId, catId);
+        print("Error en add gato");
         return false;
       }
+
+      final catGet = await getCatById(cat.id);
+      if (catGet == null) {
+        print("Error: El gato con ID ${cat.id} no existe");
+        return false;
+      }
+
+      final updatedCat =
+          cat.copyWith(coloniaId: toColoniaId); // Actualizar el modelo del gato
+      final updated = await updateCat(updatedCat);
+      if (!updated) {
+        print("Error al actualizar el campo coloniaId del gato");
+        return false;
+      }
+
       return true;
     } catch (e) {
       print("Error al mover el gato entre colonias: $e");

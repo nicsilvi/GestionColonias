@@ -22,8 +22,13 @@ class _CatView extends ConsumerState<CatView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gatos'),
-      ),
+          title: Text(
+        'Gatos',
+        style: Theme.of(context)
+            .textTheme
+            .headlineSmall
+            ?.copyWith(color: Theme.of(context).colorScheme.primary),
+      )),
       endDrawer: const DrawerMenu(),
       body: catListAsync.when(
         loading: () => const Center(

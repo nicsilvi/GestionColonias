@@ -29,5 +29,5 @@ abstract class CatRepository {
   Future<bool> addCatComment(String catId, String comment);
   Future<CatModel?> getCatById(String catId);
   Future<bool> moveCatToAnotherColonia(
-      String fromColoniaId, String toColoniaId, String catId);
+      String? fromColoniaId, String toColoniaId, String catId);
 }

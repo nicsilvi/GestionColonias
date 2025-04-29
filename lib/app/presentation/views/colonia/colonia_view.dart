@@ -147,7 +147,9 @@ class ColoniaDetails extends ConsumerWidget {
                                             ),
                                             onPressed: () =>
                                                 Navigator.pop(context, null),
-                                            child: const Text("Cancelar"),
+                                            child: const Text("Cancelar",
+                                                style: TextStyle(
+                                                    color: Colors.red)),
                                           ),
                                         ],
                                       );

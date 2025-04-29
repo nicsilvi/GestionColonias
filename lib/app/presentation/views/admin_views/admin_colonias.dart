@@ -19,18 +19,14 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
     final userLoaderState =
         ref.watch(userLoaderFutureProvider); // Define userLoaderState
     final coloniaListAsync = ref.watch(coloniaListProvider);
-    final textColor = Theme.of(context).textTheme.bodyLarge?.color;
-    final titleColor = Theme.of(context).primaryColor;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Bienvenido, ${userLoaderState.value?.firstName ?? "User"}",
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
       ),
       endDrawer: const DrawerMenu(),
       body: coloniaListAsync.when(
@@ -50,7 +46,8 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
             return Center(
               child: Text(
                 "No hay colonias disponibles",
-                style: TextStyle(color: textColor),
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color),
               ),
             );
           }
@@ -59,15 +56,14 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
             itemBuilder: (context, index) {
               final colonia = coloniaList[index];
               return Card(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).cardColor,
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
                 elevation: 2,
                 child: ListTile(
                   leading: CircleAvatar(
-                      backgroundColor: Theme.of(context)
-                          .unselectedWidgetColor, //poner algo mas transparente?
+                      backgroundColor: Theme.of(context).unselectedWidgetColor,
                       child: Icon(
                         Icons.location_on,
                         size: 20,
@@ -76,11 +72,13 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
                   title: Text(
                     "Colonia: ${colonia.id}",
                     style: TextStyle(
-                        color: titleColor, fontWeight: FontWeight.bold),
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     "Número de gatos actualmente: ${colonia.cats.length}\nÚltimo comentario añadido: ${colonia.comments?.isNotEmpty == true ? colonia.comments?.last : "Sin comentarios"}",
-                    style: TextStyle(color: textColor),
+                    style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge?.color),
                   ),
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),
@@ -90,6 +88,8 @@ class _AdminColoniasState extends ConsumerState<AdminColonias> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
+                            backgroundColor:
+                                Theme.of(context).dialogTheme.backgroundColor,
                             title: const Text("Confirmar eliminación"),
                             content: const Text(
                                 "¿Estás seguro de que deseas eliminar esta colonia?"),

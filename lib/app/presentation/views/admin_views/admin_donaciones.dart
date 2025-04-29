@@ -20,8 +20,10 @@ class _AdminDonacionesState extends ConsumerState<AdminDonaciones> {
 
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text("Bienvenido, ${userLoaderState.value?.firstName ?? "User"}"),
+        title: Text(
+          "Bienvenido, ${userLoaderState.value?.firstName ?? "User"}",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
       ),
       endDrawer: const DrawerMenu(),
       body: Container(

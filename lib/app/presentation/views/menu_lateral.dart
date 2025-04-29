@@ -1,3 +1,4 @@
+import 'package:autentification/app/core/constants/colors.dart';
 import 'package:autentification/app/presentation/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,10 +29,12 @@ class DrawerMenu extends ConsumerWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text("Menú",
                         style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: themeService
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : AppColors.accent,
                             fontSize: 20)),
                   ),
                 ),

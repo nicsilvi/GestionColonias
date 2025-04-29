@@ -20,14 +20,10 @@ final userLoaderFutureProvider = StreamProvider<UserModel?>((ref) {
 });
 
 final _navigatorKey = GlobalKey<NavigatorState>();
-
 final goRouterProvider = Provider<GoRouter>(
   (ref) {
     final userLoaderState = ref.watch(userLoaderFutureProvider);
-    //final userAuthState = ref.watch(sessionControllerProvider);
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      print("Estado del usuario desde authStateChanges: $user");
-    });
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {});
     return GoRouter(
       initialLocation: '/',
       navigatorKey: _navigatorKey,
@@ -85,8 +81,6 @@ final goRouterProvider = Provider<GoRouter>(
             ])
       ],
       redirect: (context, state) {
-        print("Estado del usuario: ${userLoaderState.value}");
-        print("Ubicación actual: ${state.uri.toString()}");
         if (userLoaderState.value == null) {
           if (state.uri.toString() == '/' ||
               state.uri.toString() == '/register') {

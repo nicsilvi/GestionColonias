@@ -24,8 +24,12 @@ class _AdminGatosState extends ConsumerState<AdminGatos> {
     final catListAsync = ref.watch(catListProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Colonias de Gatos'),
-      ),
+          title: Text(
+        'Colonias de Gatos',
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+      )),
       endDrawer: const DrawerMenu(),
       body: catListAsync.when(
         data: (catList) {
@@ -196,20 +200,35 @@ class _AdminGatosState extends ConsumerState<AdminGatos> {
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
-                                            title: const Text(
-                                                "Confirmar eliminación"),
+                                            backgroundColor: Theme.of(context)
+                                                .dialogTheme
+                                                .backgroundColor,
+                                            title: Text("Confirmar eliminación",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge),
                                             content: const Text(
                                                 "¿Estás seguro de que deseas eliminar este gato?"),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     context, false),
-                                                child: const Text("Cancelar"),
+                                                child: const Text(
+                                                  "Cancelar",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               ),
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     context, true),
-                                                child: const Text("Eliminar"),
+                                                child: const Text(
+                                                  "Eliminar",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               ),
                                             ],
                                           );

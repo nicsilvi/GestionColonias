@@ -16,7 +16,6 @@ class AppTheme {
       titleTextStyle: TextStyle(
         color: AppColors.primary,
         fontSize: 22,
-        fontWeight: FontWeight.bold,
       ),
       elevation: 4, // Un poco de sombra para el appBar
     ),
@@ -34,7 +33,6 @@ class AppTheme {
           Color.fromARGB(255, 216, 214, 214), // Definiendo el fondo del diálogo
       titleTextStyle: TextStyle(
         color: AppColors.textPrimary,
-        fontWeight: FontWeight.bold,
       ),
       contentTextStyle: TextStyle(
         color: AppColors.textPrimary,
@@ -47,13 +45,13 @@ class AppTheme {
       bodyMedium: TextStyle(
           color: AppColors.textSecondary, fontSize: 14), // Texto más pequeño
       headlineLarge: TextStyle(
-          color: AppColors.accent,
-          fontSize: 32,
-          fontWeight: FontWeight.bold), // Títulos grandes
+        color: AppColors.accent,
+        fontSize: 32,
+      ), // Títulos grandes
       headlineMedium: TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: 20,
-          fontWeight: FontWeight.w500), // Subtítulos
+        color: AppColors.textPrimary,
+        fontSize: 20,
+      ), // Subtítulos
     ),
     iconTheme: const IconThemeData(color: AppColors.accent),
     buttonTheme: const ButtonThemeData(
@@ -82,7 +80,6 @@ class AppTheme {
       titleTextStyle: TextStyle(
         color: AppColors.primaryDark,
         fontSize: 22,
-        fontWeight: FontWeight.bold,
       ),
       elevation: 4, // Un poco de sombra para el appBar
     ),
@@ -99,7 +96,6 @@ class AppTheme {
       backgroundColor: AppColors.surfaceDark, // Definiendo el fondo del diálogo
       titleTextStyle: TextStyle(
         color: AppColors.primaryDark,
-        fontWeight: FontWeight.bold,
       ),
       contentTextStyle: TextStyle(
         color: AppColors.textPrimaryDark,
@@ -116,13 +112,13 @@ class AppTheme {
       bodySmall:
           TextStyle(color: Color.fromARGB(255, 92, 88, 88), fontSize: 14),
       headlineLarge: TextStyle(
-          color: AppColors.primaryDark,
-          fontSize: 32,
-          fontWeight: FontWeight.bold), // Títulos grandes
+        color: AppColors.primaryDark,
+        fontSize: 32,
+      ), // Títulos grandes
       headlineMedium: TextStyle(
-          color: AppColors.textPrimaryDark,
-          fontSize: 20,
-          fontWeight: FontWeight.w500), // Subtítulos
+        color: AppColors.textPrimaryDark,
+        fontSize: 20,
+      ), // Subtítulos
     ),
 
     iconTheme: const IconThemeData(color: AppColors.accentDark),

@@ -12,8 +12,6 @@ class ColoniaRepositoryImpl {
   Future<List<ColoniaModel>> fetchColonias() async {
     try {
       final snapshot = await _firestore.collection('colonias').get();
-      print(
-          "Datos obtenidos de Firebase: ${snapshot.docs.map((doc) => doc.data()).toList()}");
       return snapshot.docs.map((doc) {
         final data = doc.data();
         return ColoniaModel.fromJson(data);

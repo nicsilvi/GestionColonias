@@ -34,18 +34,18 @@ void dialogoComentario(BuildContext context, CatModel catModel, WidgetRef ref) {
                     .read(catRepositoryProvider)
                     .addCatComment(catModel.id, comment);
 
-                Navigator.pop(context); // Cerrar el diálogo
-
-                // Mostrar un mensaje de éxito o error
-                if (success) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Comentario agregado")),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text("Error al agregar el comentario")),
-                  );
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  if (success) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Comentario agregado")),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text("Error al agregar el comentario")),
+                    );
+                  }
                 }
               }
             },

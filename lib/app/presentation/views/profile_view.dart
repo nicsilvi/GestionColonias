@@ -58,9 +58,26 @@ class _ProfileViewState extends ConsumerState<ProfileView>
                   const SizedBox(height: 16),
                   GestureDetector(
                     onTap: () async {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+
+                      // Ejecutar la operación de cambiar la imagen
                       await pickAndSelectImage(
                           context, userLoaderState.value!.id, ref);
-                      ref.invalidate(userLoaderFutureProvider);
+
+                      if (mounted) {
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
+                        }
+                        ref.invalidate(userLoaderFutureProvider);
+                      }
                     },
                     child: CircleAvatar(radius: 60, backgroundImage: img.image),
                   ),

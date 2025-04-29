@@ -1,5 +1,6 @@
 import 'package:autentification/app/presentation/controllers/colonia_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,6 +52,9 @@ class MapaColonias extends ConsumerWidget {
                               context: context,
                               builder: (context) {
                                 return Dialog(
+                                  backgroundColor: Theme.of(context)
+                                      .dialogTheme
+                                      .backgroundColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16.0),
                                   ),
@@ -58,7 +62,8 @@ class MapaColonias extends ConsumerWidget {
                                     padding: const EdgeInsets.all(16.0),
                                     decoration: BoxDecoration(
                                       color: Theme.of(context)
-                                          .unselectedWidgetColor,
+                                          .dialogTheme
+                                          .backgroundColor,
                                       borderRadius: BorderRadius.circular(16.0),
                                     ),
                                     child: Column(
@@ -157,7 +162,7 @@ class MapaColonias extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(16.0),
                             ),
                             child: Container(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).unselectedWidgetColor,
                                 borderRadius: BorderRadius.circular(16.0),
@@ -213,8 +218,9 @@ class MapaColonias extends ConsumerWidget {
               children: [
                 TileLayer(
                   urlTemplate:
-                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      "https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=${dotenv.env['MAPTILER_API_KEY']}",
                   subdomains: const ['a', 'b', 'c'],
+                  additionalOptions: const {},
                 ),
                 MarkerClusterLayerWidget(
                   options: MarkerClusterLayerOptions(

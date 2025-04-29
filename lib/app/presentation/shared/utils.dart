@@ -61,11 +61,17 @@ Future<void> pickAndSelectImage(
                     onTap: () async {
                       // Cuando el usuario selecciona una imagen
                       final selectedImage = images[index];
+                      Navigator.of(context).pop();
                       try {
+                        final userLoader = ref.read(userLoaderFutureProvider);
                         await manageImageInFirestore(
                             userId: userId, imageUrl: selectedImage);
+                        if (context.mounted) {
+                          print(
+                              "despues de manageImageFirestore, ${userLoader.value?.profileImage}\n");
+                        }
+
                         print("Imagen seleccionada: $selectedImage");
-                        ref.invalidate(userLoaderFutureProvider);
                       } catch (e) {
                         debugPrint("Error al seleccionar la imagen: $e");
                       }
