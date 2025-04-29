@@ -1,7 +1,8 @@
-# Authentication
+# Readme
 
-run -flutter pub get
-    -flutter pub add flutter_map latlong2
+Para que funcione hay que ejecutar: 
+run -flutter pub get, 
+    -flutter pub add flutter_map latlong2, 
     flutterfire configure
 
 
