@@ -37,10 +37,8 @@ class CatRepositoryImpl {
       String? fromColoniaId, String toColoniaId, CatModel cat) async {
     try {
       final coloniaImpl = ColoniaRepositoryImpl();
-      print("Colonia ID: $toColoniaId");
-      print("Gato ID: ${cat.id}");
-      print(coloniaImpl);
       if (fromColoniaId != null) {
+        //Si el gato ya tiene colonia se borra la colonia
         final removed =
             await coloniaImpl.removeCatFromColonia(fromColoniaId, cat.id);
         if (!removed) {
@@ -48,19 +46,16 @@ class CatRepositoryImpl {
           return false;
         }
       }
-
       final added = await coloniaImpl.addCatToColonia(toColoniaId, cat.id);
       if (!added) {
         print("Error en add gato");
         return false;
       }
-
       final catGet = await getCatById(cat.id);
       if (catGet == null) {
         print("Error: El gato con ID ${cat.id} no existe");
         return false;
       }
-
       final updatedCat =
           cat.copyWith(coloniaId: toColoniaId); // Actualizar el modelo del gato
       final updated = await updateCat(updatedCat);

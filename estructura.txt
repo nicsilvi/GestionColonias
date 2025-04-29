@@ -1,0 +1,184 @@
+.
+├── analysis_options.yaml
+├── android
+│   ├── app
+│   │   ├── build.gradle
+│   │   ├── google-services.json
+│   │   └── src
+│   ├── autentification_android.iml
+│   ├── build.gradle
+│   ├── gradle
+│   │   └── wrapper
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   ├── local.properties
+│   └── settings.gradle
+├── assets
+│   ├── animations
+│   │   ├── animationCat1.json
+│   │   └── animationCat2.json
+│   └── img
+│       ├── avatar10.png
+│       ├── avatar11.png
+│       ├── avatar12.png
+│       ├── avatar1.png
+│       ├── avatar2.png
+│       ├── avatar3.png
+│       ├── avatar4.png
+│       ├── avatar5.png
+│       ├── avatar6.png
+│       ├── avatar7.png
+│       ├── avatar8.png
+│       ├── avatar9.png
+│       ├── cat10.jpg
+│       ├── cat11.jpg
+│       ├── cat12.jpg
+│       ├── cat13.jpg
+│       ├── cat14.jpg
+│       ├── cat15.jpg
+│       ├── cat16.jpg
+│       ├── cat17.jpg
+│       ├── cat18.jpg
+│       ├── cat19.jpg
+│       ├── cat1.jpg
+│       ├── cat20.jpg
+│       ├── cat21.jpg
+│       ├── cat22.jpg
+│       ├── cat23.jpg
+│       ├── cat24.jpg
+│       ├── cat25.jpg
+│       ├── cat26.jpg
+│       ├── cat27.jpg
+│       ├── cat28.jpg
+│       ├── cat2.jpg
+│       ├── cat3.jpg
+│       ├── cat4.jpg
+│       ├── cat5.jpg
+│       ├── cat6.jpg
+│       ├── cat7.jpg
+│       ├── cat8.jpg
+│       └── cat9.jpg
+├── autentification.iml
+├── build
+│   ├── cache.dill.track.dill
+│   ├── dd87a749a814d2cef3e8fa28887cbcf6
+│   │   ├── _composite.stamp
+│   │   ├── gen_dart_plugin_registrant.stamp
+│   │   └── gen_localizations.stamp
+│   └── flutter_assets
+│       ├── AssetManifest.bin
+│       ├── AssetManifest.bin.json
+│       ├── AssetManifest.json
+│       ├── assets
+│       ├── FontManifest.json
+│       ├── fonts
+│       ├── NOTICES
+│       ├── packages
+│       └── shaders
+├── estructura.txt
+├── firebase.json
+├── firepit-log.txt
+├── ios
+│   ├── Flutter
+│   │   ├── AppFrameworkInfo.plist
+│   │   ├── Debug.xcconfig
+│   │   ├── flutter_export_environment.sh
+│   │   ├── Generated.xcconfig
+│   │   └── Release.xcconfig
+│   ├── Runner
+│   │   ├── AppDelegate.swift
+│   │   ├── Assets.xcassets
+│   │   ├── Base.lproj
+│   │   ├── GeneratedPluginRegistrant.h
+│   │   ├── GeneratedPluginRegistrant.m
+│   │   ├── Info.plist
+│   │   └── Runner-Bridging-Header.h
+│   ├── RunnerTests
+│   │   └── RunnerTests.swift
+│   ├── Runner.xcodeproj
+│   │   ├── project.pbxproj
+│   │   ├── project.xcworkspace
+│   │   └── xcshareddata
+│   └── Runner.xcworkspace
+│       ├── contents.xcworkspacedata
+│       └── xcshareddata
+├── lib
+│   ├── app
+│   │   ├── core
+│   │   ├── domain
+│   │   └── presentation
+│   ├── firebase_options.dart
+│   └── main.dart
+├── linux
+│   ├── CMakeLists.txt
+│   ├── flutter
+│   │   ├── CMakeLists.txt
+│   │   ├── ephemeral
+│   │   ├── generated_plugin_registrant.cc
+│   │   ├── generated_plugin_registrant.h
+│   │   └── generated_plugins.cmake
+│   ├── main.cc
+│   ├── my_application.cc
+│   └── my_application.h
+├── macos
+│   ├── Flutter
+│   │   ├── ephemeral
+│   │   ├── Flutter-Debug.xcconfig
+│   │   ├── Flutter-Release.xcconfig
+│   │   └── GeneratedPluginRegistrant.swift
+│   ├── Runner
+│   │   ├── AppDelegate.swift
+│   │   ├── Assets.xcassets
+│   │   ├── Base.lproj
+│   │   ├── Configs
+│   │   ├── DebugProfile.entitlements
+│   │   ├── Info.plist
+│   │   ├── MainFlutterWindow.swift
+│   │   └── Release.entitlements
+│   ├── RunnerTests
+│   │   └── RunnerTests.swift
+│   ├── Runner.xcodeproj
+│   │   ├── project.pbxproj
+│   │   ├── project.xcworkspace
+│   │   └── xcshareddata
+│   └── Runner.xcworkspace
+│       ├── contents.xcworkspacedata
+│       └── xcshareddata
+├── pubspec.lock
+├── pubspec.yaml
+├── README.md
+├── test
+│   └── widget_test.dart
+├── web
+│   ├── favicon.png
+│   ├── icons
+│   │   ├── Icon-192.png
+│   │   ├── Icon-512.png
+│   │   ├── Icon-maskable-192.png
+│   │   └── Icon-maskable-512.png
+│   ├── index.html
+│   └── manifest.json
+└── windows
+    ├── CMakeLists.txt
+    ├── flutter
+    │   ├── CMakeLists.txt
+    │   ├── ephemeral
+    │   ├── generated_plugin_registrant.cc
+    │   ├── generated_plugin_registrant.h
+    │   └── generated_plugins.cmake
+    └── runner
+        ├── CMakeLists.txt
+        ├── flutter_window.cpp
+        ├── flutter_window.h
+        ├── main.cpp
+        ├── resource.h
+        ├── resources
+        ├── runner.exe.manifest
+        ├── Runner.rc
+        ├── utils.cpp
+        ├── utils.h
+        ├── win32_window.cpp
+        └── win32_window.h
+
+55 directories, 126 files

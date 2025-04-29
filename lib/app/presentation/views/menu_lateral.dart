@@ -18,7 +18,6 @@ class DrawerMenu extends ConsumerWidget {
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            //mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
