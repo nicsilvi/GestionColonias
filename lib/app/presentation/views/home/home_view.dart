@@ -22,7 +22,7 @@ class _HomeviewState extends ConsumerState<HomeView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Bienvenido, ${userLoaderState.value?.firstName ?? "User"}",
+          "Bienvenid@, ${userLoaderState.value?.firstName ?? "User"}",
           style: Theme.of(context)
               .textTheme
               .headlineSmall

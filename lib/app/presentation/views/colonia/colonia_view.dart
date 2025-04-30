@@ -15,7 +15,15 @@ class ColoniaDetails extends ConsumerWidget {
     final userAsync = ref.watch(userLoaderFutureProvider);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          "Colonias Asociadas",
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(color: Theme.of(context).colorScheme.primary),
+        ),
+      ),
       endDrawer: const DrawerMenu(),
       body: userAsync.when(
         data: (user) {
@@ -25,7 +33,7 @@ class ColoniaDetails extends ConsumerWidget {
                   style: Theme.of(context).textTheme.bodyLarge),
             );
           }
-
+          ref.invalidate(coloniaListProvider);
           // Escuchar la lista de colonias
           final coloniaListAsync = ref.watch(coloniaListProvider);
 
@@ -38,7 +46,8 @@ class ColoniaDetails extends ConsumerWidget {
 
               if (userColonias.isEmpty) {
                 return Center(
-                  child: Text("No tienes colonias asignadas",
+                  child: Text(
+                      "No tienes colonias asignadas,\npuedes asignarte una desde aquí o desde el mapa",
                       style: Theme.of(context).textTheme.bodyLarge),
                 );
               }

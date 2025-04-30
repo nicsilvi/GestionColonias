@@ -95,7 +95,7 @@ class GatoCard extends ConsumerWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
+                  child: Image.asset(
                     catModel.profileImage,
                     height: 200,
                     width: double.infinity,

@@ -4,7 +4,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../controllers/router_controller.dart';
@@ -105,9 +104,8 @@ class MapaColonias extends ConsumerWidget {
                                                         coloniaRepositoryProvider)
                                                     .assignColoniaToUser(
                                                         user!.id, colonia.id);
-
                                                 if (!context.mounted) return;
-
+                                                print("success aqui");
                                                 if (success) {
                                                   // Mostrar mensaje de éxito
                                                   ScaffoldMessenger.of(context)
@@ -117,8 +115,11 @@ class MapaColonias extends ConsumerWidget {
                                                           "Colonia asignada exitosamente"),
                                                     ),
                                                   );
-
-                                                  // Invalidar los proveedores para actualizar la lista de colonias y el usuario
+                                                  await ref
+                                                      .read(
+                                                          coloniaRepositoryProvider)
+                                                      .assignColoniaToUser(
+                                                          user.id, colonia.id);
                                                   ref.invalidate(
                                                       coloniaListProvider);
                                                   ref.invalidate(
@@ -133,9 +134,6 @@ class MapaColonias extends ConsumerWidget {
                                                     ),
                                                   );
                                                 }
-
-                                                // Navegar a la página de colonias
-                                                context.go('/home/colonia');
                                               },
                                               child: const Text("Aceptar"),
                                             ),

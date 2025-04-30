@@ -1,3 +1,4 @@
+import 'package:autentification/app/presentation/controllers/colonia_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,6 +41,9 @@ void dialogoComentario(BuildContext context, CatModel catModel, WidgetRef ref) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Comentario agregado")),
                     );
+
+                    ref.invalidate(coloniaListProvider);
+                    ref.invalidate(catListProvider);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
